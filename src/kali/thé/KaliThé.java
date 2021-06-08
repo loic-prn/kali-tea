@@ -5,6 +5,9 @@
  */
 package kali.thé;
 
+import kali.thé.graphique.Menu;
+import kali.thé.modele.*;
+
 /**
  *
  * @author lperr
@@ -15,9 +18,12 @@ public class KaliThé {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("init"); // commentaire
-        System.out.println("it works"); // commentaire 2
-        System.out.println("je suis bo");
+               
+        Menu me = new Menu(500,500);
+        me.setVisible(true);
+        System.out.println("build works");
+        
+        
     }
     
 }
