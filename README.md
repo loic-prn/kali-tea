@@ -1,3 +1,3 @@
-# kali-thé
-MIAMIAMIAMIAM?
-I LOVE COCK
+# Kali-thé
+
+The best tea pot you ever saw
