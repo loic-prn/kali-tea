@@ -5,32 +5,50 @@
  */
 package kali.thé.modele;
 
+import java.util.Date;
+
 /**
  *
  * @author p2008444
  */
 public class TheProgramme {
-    String pretPour;
-    boolean recurrence;
+    /**
+     * @param pretPour une date qui indique la fin de préparation du thé
+     * @param recurrence un tableau de  7 booléens correspondant aux 7 jours de la semaine. Le tableau indique quels jours sont concernés par l'infusion d'un thé programmé
+     */
+    Date pretPour;
+    boolean[] recurrence;
 
-    public TheProgramme(String pretPour, boolean recurrence) {
+    public TheProgramme(Date pretPour, boolean[] recurrence) {
         this.pretPour = pretPour;
-        this.recurrence = recurrence;
+        recurrence = new boolean[recurrence.length];
+        for (int i=0; i< recurrence.length; i++)
+            this.recurrence[i] = recurrence[i];
     }
-
-    public String getPretPour() {
+    
+    /**
+     * obtenir le paramètre pretPour de la classe
+     * @return le paramètre pretPour
+     */
+    public Date getPretPour() {
         return pretPour;
     }
 
-    public boolean isRecurrence() {
-        return recurrence;
+    /**
+     * La fonction vérifie si, pour un jour donné, un thé est programmé
+     * @param i un entier corresponant à un jour de la semaine
+     * @return <code>true</code> ou <code>false</code>
+     */
+    public boolean isRecurrence(int i) {
+        return recurrence[i];
     }
 
-    public void setPretPour(String pretPour) {
+    public void setPretPour(Date pretPour) {
         this.pretPour = pretPour;
     }
 
-    public void setRecurrence(boolean recurrence) {
+    public void setRecurrence(boolean[] recurrence) {
+        recurrence = new boolean[recurrence.length];
         this.recurrence = recurrence;
     }
     
