@@ -16,6 +16,15 @@ public class The {
     private int temperature;
     private String description;
 
+    
+    /**
+     * Un thé
+     * @param tempsInfusion Le temps d'infusion du thé durant, soit le temps que restera le panier de thé dans l'eau
+     * @param nom Le nom du thé
+     * @param temperature la température d'infusion du thé, soit la température que la resistance atteindra pour l'infusion
+     * @param description Description du thé
+     */
+    
     public The(double tempsInfusion, String nom, int temperature, String description) {
         this.tempsInfusion = tempsInfusion;
         this.nom = nom;
