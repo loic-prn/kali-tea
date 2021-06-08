@@ -55,6 +55,10 @@ public class Menu extends JFrame{
         return list;
     }
 
+    /*
+    *
+    */
+    
     public ArrayList<TheProgramme> getProglist() {
         return proglist;
     }
