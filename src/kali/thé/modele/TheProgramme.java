@@ -9,11 +9,11 @@ package kali.thé.modele;
  *
  * @author p2008444
  */
-public class ThéProgrammé {
+public class TheProgramme {
     String pretPour;
     boolean recurrence;
 
-    public ThéProgrammé(String pretPour, boolean recurrence) {
+    public TheProgramme(String pretPour, boolean recurrence) {
         this.pretPour = pretPour;
         this.recurrence = recurrence;
     }

@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kali.thé.modele;
+package kali.thé.graphique;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import kali.thé.modele.*;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Menu extends JFrame{
         this.longueur = longueur;
         this.largeur = largeur;
         this.list = new ArrayList<>();
-        this.proglist =null;
+        this.proglist = null;
     }
 
     public void setLongueur(int longueur) {

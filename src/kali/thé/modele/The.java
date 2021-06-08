@@ -9,14 +9,14 @@ package kali.thé.modele;
  *
  * @author p2002527
  */
-public class Thé {
+public class The {
 
     private double tempsInfusion;
     private String nom;
     private int temperature;
     private String description;
 
-    public Thé(double tempsInfusion, String nom, int temperature, String description) {
+    public The(double tempsInfusion, String nom, int temperature, String description) {
         this.tempsInfusion = tempsInfusion;
         this.nom = nom;
         this.temperature = temperature;
