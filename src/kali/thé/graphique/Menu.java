@@ -38,6 +38,9 @@ public class Menu extends JFrame{
         this.largeur = largeur;
         this.list = new ArrayList<>();
         this.proglist = null;
+        
+        this.setTitle("");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
