@@ -17,6 +17,7 @@ public class KaliThé {
     public static void main(String[] args) {
         System.out.println("init"); // commentaire
         System.out.println("it works");
+        System.out.println("je suis bo");
     }
-
+    
 }
