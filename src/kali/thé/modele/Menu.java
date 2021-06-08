@@ -5,6 +5,7 @@
  */
 package kali.thé.modele;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,23 +16,23 @@ import javax.swing.JFrame;
  * @author lperr
  */
 public class Menu extends JFrame{
-    private double longueur;
-    private double largeur;
+    private int longueur;
+    private int largeur;
     ArrayList<The> list;
     ArrayList<TheProgramme> proglist;
 
-    public Menu(double longueur, double largeur) {
+    public Menu(int longueur, int largeur) {
         this.longueur = longueur;
         this.largeur = largeur;
         this.list = new ArrayList<>();
         this.proglist =null;
     }
 
-    public void setLongueur(double longueur) {
+    public void setLongueur(int longueur) {
         this.longueur = longueur;
     }
 
-    public void setLargeur(double largeur) {
+    public void setLargeur(int largeur) {
         this.largeur = largeur;
     }
 
@@ -62,6 +63,10 @@ public class Menu extends JFrame{
     public ArrayList<TheProgramme> getProglist() {
         return proglist;
     }
-    
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(longueur,largeur);
+    }
     
 }
