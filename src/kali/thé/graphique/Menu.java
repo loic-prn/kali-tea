@@ -9,7 +9,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import kali.thé.modele.*;
 
 /**
@@ -21,7 +23,11 @@ public class Menu extends JFrame{
     private int largeur;
     ArrayList<The> list;
     ArrayList<TheProgramme> proglist;
-
+    
+    JLabel titre;
+    JButton retour;
+    JLabel heure;
+    
     /**
      * 
      * @param longueur longueur de la fenetre
