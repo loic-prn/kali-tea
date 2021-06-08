@@ -1,3 +1,3 @@
 # Kali-thé
 
-The best tea pot you ever saw
+The best teapot you've ever seen
