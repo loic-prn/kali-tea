@@ -26,7 +26,7 @@ import javax.swing.JSlider;
  */
 public class Preparation extends JPanel implements ActionListener{
     
-    JFrame owner;
+    Menu owner;
     JLabel temperaturePrepa;
     JSlider slider1;
     JLabel temperature;
@@ -39,7 +39,7 @@ public class Preparation extends JPanel implements ActionListener{
     
     
     
-    public Preparation(JFrame o) {
+    public Preparation(Menu o) {
         this.owner = o;
         this.init();
     }
