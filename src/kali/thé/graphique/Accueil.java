@@ -28,6 +28,7 @@ public class Accueil extends JPanel implements ActionListener{
     JButton catalogue;
     JButton infuProgrammé;
     JButton Param;
+    JButton theManuel;
     
     
     public Accueil(Menu o){
@@ -50,13 +51,17 @@ public class Accueil extends JPanel implements ActionListener{
         Param.setBackground(Color.blue);
         Param.setForeground(Color.white);
         Param.addActionListener(this);
+        theManuel = new JButton(" Thé Manuel");
+        theManuel.setBackground(Color.blue);
+        theManuel.setForeground(Color.white);
+        theManuel.addActionListener(this);
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Accueil");
         
         cont.fill = GridBagConstraints.BOTH;
-        cont.insets = new Insets(20,0,20,0);
+        cont.insets = new Insets(15,0,15,0);
         
         cont.gridx = 0;
         cont.gridy = 0;
@@ -68,7 +73,15 @@ public class Accueil extends JPanel implements ActionListener{
         
         cont.gridx = 0;
         cont.gridy = 2;
-        this.add(Param, cont);           
+        this.add(Param, cont);
+
+        cont.gridx = 0;
+        cont.gridy = 2;
+        this.add(Param, cont);    
+        
+        cont.gridx = 0;
+        cont.gridy = 3;
+        this.add(theManuel, cont);   
     }
 
     @Override
@@ -81,6 +94,9 @@ public class Accueil extends JPanel implements ActionListener{
         }
         else if (e.getSource() == Param){
             owner.setPano(new Param(owner));
+        }
+        else if (e.getSource() == theManuel){
+            owner.setPano(new Preparation(owner));
         }
         
     }
