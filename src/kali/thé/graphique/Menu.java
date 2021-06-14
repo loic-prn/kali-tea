@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import kali.thé.modele.*;
 
 /**
@@ -24,9 +25,7 @@ public class Menu extends JFrame{
     ArrayList<The> list;
     ArrayList<TheProgramme> proglist;
     
-    JLabel titre;
-    JButton retour;
-    JLabel heure;
+    JPanel pano;
     
     /**
      * 
@@ -41,6 +40,9 @@ public class Menu extends JFrame{
         
         this.setTitle("");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //pano = new Page1();
+        //this.setContentPane(pano);
     }
 
     /**
