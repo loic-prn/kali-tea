@@ -38,12 +38,15 @@ public class Accueil extends JPanel implements ActionListener{
         //inits
         catalogue = new JButton("Catalogue de thés");
         catalogue.setBackground(Color.blue);
+        catalogue.setForeground(Color.white);
         catalogue.addActionListener(this);
         infuProgrammé = new JButton("Infusion programmées");
         infuProgrammé.setBackground(Color.blue);
+        infuProgrammé.setForeground(Color.white);
         infuProgrammé.addActionListener(this);
         Param = new JButton("Paramètres");
         Param.setBackground(Color.blue);
+        Param.setForeground(Color.white);
         Param.addActionListener(this);
         
         this.setLayout(new GridBagLayout());
