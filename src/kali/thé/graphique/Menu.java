@@ -21,7 +21,7 @@ import kali.thé.modele.*;
  *
  * @author lperr
  */
-public class Menu extends JFrame{
+public class Menu extends JFrame implements ActionListener{
     private int longueur;
     private int largeur;
     ArrayList<The> list;
@@ -60,17 +60,16 @@ public class Menu extends JFrame{
         menu = new JPanel();
         retour = new JButton("retour");
         heure = new JLabel("15:40");
+        retour.addActionListener(this);
         
         menu.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
-        
         menu.setPreferredSize(new Dimension(720,50));
         
-        cont.anchor = GridBagConstraints.FIRST_LINE_START;
+        cont.fill = GridBagConstraints.HORIZONTAL;
+        cont.anchor = GridBagConstraints.NORTHWEST;
         cont.gridx = 0; cont.gridy = 0;
         menu.add(retour,cont);
-        
-        cont.anchor = GridBagConstraints.FIRST_LINE_END;
         cont.gridx = 1; cont.gridy = 0;
         menu.add(heure,cont);
     }
@@ -147,5 +146,12 @@ public class Menu extends JFrame{
 //    public Dimension getPreferredSize() {
 //        return new Dimension(longueur,largeur);
 //    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == retour){
+            
+        }
+    }
     
 }
