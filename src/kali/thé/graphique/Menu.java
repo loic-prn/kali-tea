@@ -41,7 +41,7 @@ public class Menu extends JFrame{
        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setPano(new Accueil(this));
+        this.setPano(new Preparation(this));
     }
     
     public void setPano(JPanel j){
