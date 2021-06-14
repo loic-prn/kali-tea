@@ -40,7 +40,7 @@ public class Catalogue extends JPanel implements ActionListener{
     }
     
     private void init(){
-        owner.setTitle("Accueil");
+        owner.setTitle("Catalogue");
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
@@ -61,9 +61,7 @@ public class Catalogue extends JPanel implements ActionListener{
             
         }
         
-
-
-             
+         
     }
 
     @Override
