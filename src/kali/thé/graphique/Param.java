@@ -25,8 +25,11 @@ public class Param extends JPanel{
     JButton wifi;
     JButton language;
     
+    
+    
     public Param(JFrame o) {
         this.owner = o;
+        this.init();
     }
     
     private void init(){
@@ -45,6 +48,22 @@ public class Param extends JPanel{
         cont.fill = GridBagConstraints.BOTH;
         cont.gridx = 1;
         cont.gridy = 0;
+        
+        
+        this.add(timeSwap, cont);
+        cont.gridy = 1;
+        
+        this.add(majThe, cont);
+        
+        cont.gridy = 2;
+        this.add(majLog, cont);
+        
+        cont.gridy = 3;
+        this.add(wifi, cont);
+        
+        cont.gridy = 4;
+        this.add(language,cont);
+        
         
         
         
