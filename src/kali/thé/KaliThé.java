@@ -20,7 +20,7 @@ public class KaliThé {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-               
+        // truc
         Menu me = new Menu(720,480);
         me.setVisible(true);
         System.out.println("build works");
