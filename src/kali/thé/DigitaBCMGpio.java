@@ -55,34 +55,9 @@ public class DigitaBCMGpio implements Execute{
 
         try {
             Thread.sleep(1000);
-
-            // turn off gpio pin 
-            pin.low();
-            System.out.println("--> GPIO state should be: OFF");
-
-            Thread.sleep(1000);
-
-            // toggle the current state of gpio pin  (should turn on)
-            pin.toggle();
-            System.out.println("--> GPIO state should be: ON");
-
-            Thread.sleep(1000);
-
-            // toggle the current state of gpio pin (should turn off)
-            pin.toggle();
-            System.out.println("--> GPIO state should be: OFF");
-
-            Thread.sleep(1000);
-
-            // turn on gpio pin  for 1 second and then off
-            System.out.println("--> GPIO state should be: ON for only 1 second");
-            pin.pulseSync(1000);
-
-            // stop all GPIO activity/threads by shutting down the GPIO controller
-            // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-            gpio.shutdown();
-
-            System.out.println("Exiting DigitaBCMGpio");
+            pin.high();
+            int i = 0;
+            Thread.sleep(1000000000);
         
         }catch (InterruptedException ex) {
             Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
