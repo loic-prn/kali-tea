@@ -13,8 +13,9 @@ package kali.thé;
  *
  * #L%
  */
-
 import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.Pin;
+//import com.pi4j.io.gpio.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
