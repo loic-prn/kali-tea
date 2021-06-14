@@ -12,6 +12,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -24,7 +26,7 @@ import javax.swing.JSlider;
  *
  * @author p2008444
  */
-public class Preparation extends JPanel implements ActionListener{
+public class Preparation extends JPanel implements ActionListener,ChangeListener{
     
     Menu owner;
     JLabel temperaturePrepa;
@@ -33,7 +35,7 @@ public class Preparation extends JPanel implements ActionListener{
     JLabel tempsPrep;
     JComboBox listeTemps;
     JButton preparer;
-    JSlider slider2;
+    JProgressBar progressPrep;
     JLabel tempsRestant;
     
     
@@ -51,9 +53,12 @@ public class Preparation extends JPanel implements ActionListener{
         GridBagConstraints cont = new GridBagConstraints();
         
         temperaturePrepa = new JLabel("Temperature de prepartion");
+        temperature = new JLabel("100°C");
+        
         slider1 = new JSlider();
         slider1.setPreferredSize(new Dimension(300,20));
-        temperature = new JLabel("100°C");
+        slider1.addChangeListener(e-> temperature.setText(String.valueOf(slider1.getValue()) + "°C"));
+        
         tempsPrep = new JLabel("Temps de préparation");
         listeTemps = new JComboBox();
         listeTemps.setPreferredSize(new Dimension(150,30));
@@ -61,8 +66,10 @@ public class Preparation extends JPanel implements ActionListener{
         preparer.setBackground(Color.blue);
         preparer.setForeground(Color.white);
         preparer.addActionListener(this);
-        slider2 = new JSlider();
-        slider2.setPreferredSize(new Dimension(200,20));
+        progressPrep = new JProgressBar();
+        progressPrep.setPreferredSize(new Dimension(200,20));
+        progressPrep.setForeground(Color.red);
+        progressPrep.setValue(20);
         tempsRestant = new JLabel("Temps restant : 1 min");
         
 
@@ -114,7 +121,7 @@ public class Preparation extends JPanel implements ActionListener{
         cont.gridwidth = 0;
         cont.insets = new Insets(0,0,5,0);
         cont.gridy = 6;
-        this.add(slider2,cont);
+        this.add(progressPrep,cont);
         
         cont.fill = GridBagConstraints.CENTER;
         cont.gridy = 7;
@@ -130,5 +137,10 @@ public class Preparation extends JPanel implements ActionListener{
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());
+    }
+
+    @Override
+    public void changed(ObservableValue ov, Object t, Object t1) {
+        
     }
 }
