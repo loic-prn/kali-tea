@@ -6,20 +6,21 @@
 package kali.thé.graphique;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page1 extends Menu{
+public class Page1 extends JPanel{
     
     JButton catalogue;
     JButton infuProgrammé;
     JButton Param;
     
     
-    public Page1(int longueur, int largeur) {
-        super(longueur, largeur);
+    public Page1() {
+        
     }
     
     

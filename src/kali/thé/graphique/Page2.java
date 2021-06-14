@@ -6,17 +6,18 @@
 package kali.thé.graphique;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page2 extends Menu{
+public class Page2 extends JPanel{
     
     JButton[] tabThe;
     
-    public Page2(int longueur, int largeur) {
-        super(longueur, largeur);
+    public Page2() {
+        
     }
     
 }

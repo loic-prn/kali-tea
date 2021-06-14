@@ -9,12 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page5 extends Menu{
+public class Page5 extends JPanel{
     
     JLabel heure;
     JComboBox listeHeures;
@@ -22,8 +23,8 @@ public class Page5 extends Menu{
     JCheckBox[] listeCheckBox;
     JLabel[] joursSemaine;
     
-    public Page5(int longueur, int largeur) {
-        super(longueur, largeur);
+    public Page5() {
+        
     }
     
 }

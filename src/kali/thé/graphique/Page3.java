@@ -6,12 +6,13 @@
 package kali.thé.graphique;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page3 extends Menu{
+public class Page3 extends JPanel{
     
     JButton timeSwap;
     JButton majThé;
@@ -19,8 +20,8 @@ public class Page3 extends Menu{
     JButton wifi;
     JButton language;
     
-    public Page3(int longueur, int largeur) {
-        super(longueur, largeur);
+    public Page3() {
+        
     }
     
 }

@@ -8,12 +8,13 @@ package kali.thé.graphique;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page4 extends Menu{
+public class Page4 extends JPanel{
     
     JLabel temperaturePrepa;
     // Slider
@@ -26,8 +27,7 @@ public class Page4 extends Menu{
     JLabel tempsRestant;
     
     
-    public Page4(int longueur, int largeur) {
-        super(longueur, largeur);
+    public Page4() {
     }
     
 }
