@@ -6,6 +6,8 @@
 package kali.thé.graphique;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,6 +29,11 @@ public class Menu extends JFrame{
     
     JPanel pano;
     
+    //menu
+    JPanel menu;
+    JButton retour;
+    JLabel heure;    
+    
     /**
      * 
      * @param longueur longueur de la fenetre
@@ -37,16 +44,49 @@ public class Menu extends JFrame{
         this.largeur = largeur;
         this.list = new ArrayList<>();
         this.proglist = null;
-        
+       
        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setPano(new Preparation(this));
+        this.setPano(new Accueil(this));
     }
     
     public void setPano(JPanel j){
         pano = j;
-        this.setContentPane(pano);
+        initPan();
+    }
+    
+    private void initMenu(){
+        menu = new JPanel();
+        retour = new JButton("retour");
+        heure = new JLabel("15:40");
+        
+        menu.setLayout(new GridBagLayout());
+        GridBagConstraints cont = new GridBagConstraints();
+        
+        menu.setPreferredSize(new Dimension(720,50));
+        
+        cont.anchor = GridBagConstraints.WEST;
+        cont.gridx = 0; cont.gridy = 0;
+        menu.add(retour,cont);
+        
+        //cont.anchor = GridBagConstraints.EAST;
+        cont.gridx = 1; cont.gridy = 0;
+        menu.add(heure,cont);
+    }
+    
+    private void initPan(){
+        initMenu();
+        JPanel panTemp = new JPanel();
+        panTemp.setLayout(new GridBagLayout());
+        GridBagConstraints cont = new GridBagConstraints();        
+        
+        cont.gridx = 0; cont.gridy = 0;
+        panTemp.add(menu,cont);
+        cont.gridx = 0; cont.gridy = 1;
+        panTemp.add(pano,cont);
+        
+        this.setContentPane(panTemp);
         this.pack();
     }
     
@@ -71,7 +111,7 @@ public class Menu extends JFrame{
      * permet d'obtenir la longueur de la fenetre
      * @return la longueur de la fenetre
      */
-    public double getLongueur() {
+    public int getLongueur() {
         return longueur;
     }
 
@@ -79,7 +119,7 @@ public class Menu extends JFrame{
      * permet d'obtenir la largeur de la fenetre
      * @return la largeur de la fenetre
      */
-    public double getLargeur() {
+    public int getLargeur() {
         return largeur;
     }
 
@@ -99,13 +139,13 @@ public class Menu extends JFrame{
         return proglist;
     }
 
-    /**
-     * obtenir la taille de préférence de la fenetre
-     * @return <code>Dimension</code> de la fenetre
-     */
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(longueur,largeur);
-    }
+//    /**
+//     * obtenir la taille de préférence de la fenetre
+//     * @return <code>Dimension</code> de la fenetre
+//     */
+//    @Override
+//    public Dimension getPreferredSize() {
+//        return new Dimension(longueur,largeur);
+//    }
     
 }

@@ -24,7 +24,6 @@ public class KaliThé {
         // truc
         Menu me = new Menu(720,480);
         me.setVisible(true);
-        System.out.println("build works");
     }
     
 }

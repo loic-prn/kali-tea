@@ -5,6 +5,7 @@
  */
 package kali.thé.graphique;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -21,12 +22,12 @@ import kali.thé.modele.The;
  */
 public class Catalogue extends JPanel implements ActionListener{
     
-    JFrame owner;
+    Menu owner;
     JButton[] tabTheButton;
     ArrayList<The> tabThe;
     
     
-    public Catalogue(JFrame o) {
+    public Catalogue(Menu o) {
         this.owner = o;
         tabThe = new ArrayList<The>();
         
@@ -66,7 +67,12 @@ public class Catalogue extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
     
 }

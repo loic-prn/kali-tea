@@ -6,6 +6,7 @@
 package kali.thé.graphique;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -81,6 +82,11 @@ public class Programmation extends JPanel implements ActionListener{
             owner.setPano(new Catalogue(owner));
         }
         
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
     
 }

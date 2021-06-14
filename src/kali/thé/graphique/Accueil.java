@@ -6,6 +6,7 @@
 package kali.thé.graphique;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -79,9 +80,14 @@ public class Accueil extends JPanel implements ActionListener{
             owner.setPano(new Programmation(owner));
         }
         else if (e.getSource() == Param){
-            owner.setPano(new Infusion(owner,new The(12.0,"Thé vert",15,"<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at lacus eleifend, volutpat dui sed, porttitor ante. Nulla blandit velit elit, scelerisque elementum mauris volutpat ac. Sed bibendum accumsan bibendum. Maecenas quis egestas urna, nec dapibus magna. Phasellus aliquet tincidunt mi sit amet vestibulum. Vestibulum pretium massa id fermentum commodo. Maecenas eu rhoncus ipsum, et tristique nulla.</html>")));
+            owner.setPano(new Param(owner));
         }
         
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
         
     

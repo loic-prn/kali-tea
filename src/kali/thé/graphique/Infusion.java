@@ -5,12 +5,16 @@
  */
 package kali.thé.graphique;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.FlowPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +32,7 @@ import kali.thé.modele.The;
  */
 public class Infusion extends JPanel implements ActionListener{
     
-    JFrame owner;
+    Menu owner;
     The t;
     
     JLabel titreThe;
@@ -37,9 +41,11 @@ public class Infusion extends JPanel implements ActionListener{
     //Slider
     JLabel tempsRestant;
     JProgressBar progressTime;
+    FlowPane flowPane;
+    JScrollPane scrollPane;
     
     
-    public Infusion(JFrame o, The t) {
+    public Infusion(Menu o, The t) {
         this.owner = o;
         this.t = t;
         init();
@@ -49,13 +55,17 @@ public class Infusion extends JPanel implements ActionListener{
         //inits
         titreThe = new JLabel(t.getNom());
         description = new JLabel(t.getDescription());
-        description.setPreferredSize(new Dimension(200,100));
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(1, 1, 210, 259);
-        description.add(scrollPane);
+        scrollPane = new JScrollPane(description);
+        scrollPane.setPreferredSize(new Dimension(300,100));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        
+                
         infuser = new JButton("Infuser");
         progressTime = new JProgressBar();
+        progressTime.setValue(5);
+        progressTime.setForeground(Color.red);
+        progressTime.setString("50 %");
         tempsRestant = new JLabel("Temps restant: " + Double.toString(t.getTempsInfusion()) + " mins");
         
         this.setLayout(new GridBagLayout());
@@ -70,7 +80,7 @@ public class Infusion extends JPanel implements ActionListener{
         this.add(titreThe, cont);
         cont.gridx = 0;
         cont.gridy = 1;
-        this.add(description, cont);
+        this.add(scrollPane, cont);
         cont.gridx = 0;
         cont.gridy = 2;
         this.add(infuser, cont);
@@ -87,6 +97,11 @@ public class Infusion extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
                 
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
     
 }

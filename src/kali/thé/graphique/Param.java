@@ -5,6 +5,7 @@
  */
 package kali.thé.graphique;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -17,7 +18,7 @@ import javax.swing.JPanel;
  */
 public class Param extends JPanel{
     
-    JFrame owner;
+    Menu owner;
     
     JButton timeSwap;
     JButton majThe;
@@ -27,7 +28,7 @@ public class Param extends JPanel{
     
     
     
-    public Param(JFrame o) {
+    public Param(Menu o) {
         this.owner = o;
         this.init();
     }
@@ -64,14 +65,11 @@ public class Param extends JPanel{
         cont.gridy = 4;
         this.add(language,cont);
         
-        
-        
-        
-        
-        
-        
-
-        
          
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
 }
