@@ -38,9 +38,9 @@ public class Menu extends JFrame{
         this.list = new ArrayList<>();
         this.proglist = null;
         
-        this.setTitle("");
+       
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        this.setResizable(false);
         this.setPano(new Accueil(this));
     }
     

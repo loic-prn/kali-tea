@@ -32,6 +32,8 @@ public class Programmation extends JPanel implements ActionListener{
     JCheckBox[] listeCheckBox;
     JLabel[] joursSemaine;
     
+    String[] joursDeLaSemaine = { "Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche" };
+    
     public Programmation(Menu o) {
         this.owner = o;
         this.init();
@@ -40,20 +42,37 @@ public class Programmation extends JPanel implements ActionListener{
     private void init(){
         
         //inits
-        heure = new JLabel();
-        
+        heure = new JLabel("Pour quelle heure:");
+        listeHeures = new JComboBox();
+        selection = new JButton("Selectionner un thé");
+        listeCheckBox = new JCheckBox[7];
+        for (int i=0; i<7; i++){
+            listeCheckBox[i] = new JCheckBox(joursDeLaSemaine[i]);
+        }
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
-        owner.setTitle("Accueil");
+        owner.setTitle("Infusion programmée");
         
         cont.fill = GridBagConstraints.BOTH;
-        cont.insets = new Insets(20,0,20,0);
-        
+                
         cont.gridx = 0;
         cont.gridy = 0;
-        this.add(null, cont);
-                  
+        this.add(heure, cont);
+        cont.gridx = 0;
+        cont.gridy = 1;
+        this.add(listeHeures, cont);
+        cont.insets = new Insets(20,0,20,0);
+        cont.gridx = 0;
+        cont.gridy = 3;
+        this.add(selection, cont);
+        cont.insets = new Insets(0,0,0,0);
+        for (int i=0; i<7; i++){
+            cont.gridx = 0;
+            cont.gridy = 4+i;
+            this.add(listeCheckBox[i], cont);
+        }
+          
     }
 
     @Override

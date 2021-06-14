@@ -31,6 +31,22 @@ public class The {
         this.temperature = temperature;
         this.description = description;
     }
+
+    public double getTempsInfusion() {
+        return tempsInfusion;
+    }
+    public String getNom() {
+        return nom;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
     
     
     

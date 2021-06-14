@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import kali.thé.modele.The;
 
 /**
  *
@@ -40,7 +41,7 @@ public class Accueil extends JPanel implements ActionListener{
         catalogue.setBackground(Color.blue);
         catalogue.setForeground(Color.white);
         catalogue.addActionListener(this);
-        infuProgrammé = new JButton("Infusion programmées");
+        infuProgrammé = new JButton("Infusion programmée");
         infuProgrammé.setBackground(Color.blue);
         infuProgrammé.setForeground(Color.white);
         infuProgrammé.addActionListener(this);
@@ -78,7 +79,7 @@ public class Accueil extends JPanel implements ActionListener{
             owner.setPano(new Programmation(owner));
         }
         else if (e.getSource() == Param){
-            owner.setPano(new Param(owner));
+            owner.setPano(new Infusion(owner,new The(12.0,"Thé vert",15,"<html>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at lacus eleifend, volutpat dui sed, porttitor ante. Nulla blandit velit elit, scelerisque elementum mauris volutpat ac. Sed bibendum accumsan bibendum. Maecenas quis egestas urna, nec dapibus magna. Phasellus aliquet tincidunt mi sit amet vestibulum. Vestibulum pretium massa id fermentum commodo. Maecenas eu rhoncus ipsum, et tristique nulla.</html>")));
         }
         
     }
