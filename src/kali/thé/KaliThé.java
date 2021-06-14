@@ -5,6 +5,8 @@
  */
 package kali.thé;
 
+import java.awt.Dimension;
+import java.util.Date;
 import kali.thé.graphique.Menu;
 import kali.thé.modele.*;
 
@@ -19,11 +21,9 @@ public class KaliThé {
      */
     public static void main(String[] args) {
                
-        Menu me = new Menu(500,500);
+        Menu me = new Menu(720,480);
         me.setVisible(true);
         System.out.println("build works");
-        
-        
     }
     
 }

@@ -52,6 +52,4 @@ public class TheProgramme {
         this.recurrence = recurrence;
     }
     
-    
-    
 }

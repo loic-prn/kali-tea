@@ -6,22 +6,20 @@
 package kali.thé.graphique;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page3 extends JPanel{
+public class Catalogue extends JPanel{
     
-    JButton timeSwap;
-    JButton majThé;
-    JButton majLog;
-    JButton wifi;
-    JButton language;
+    JFrame owner;
+    JButton[] tabThe;
     
-    public Page3() {
-        
+    public Catalogue(JFrame o) {
+        this.owner = o;
     }
     
 }

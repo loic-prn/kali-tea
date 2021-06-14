@@ -6,28 +6,25 @@
 package kali.thé.graphique;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
  *
  * @author p2008444
  */
-public class Page4 extends JPanel{
+public class Param extends JPanel{
     
-    JLabel temperaturePrepa;
-    // Slider
+    JFrame owner;
     
-    JLabel temperature;
-    JComboBox listeTemps;
-    JButton preparer;
+    JButton timeSwap;
+    JButton majThé;
+    JButton majLog;
+    JButton wifi;
+    JButton language;
     
-    //Slider
-    JLabel tempsRestant;
-    
-    
-    public Page4() {
+    public Param(JFrame o) {
+        this.owner = o;
     }
     
 }

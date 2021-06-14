@@ -6,25 +6,30 @@
 package kali.thé.graphique;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 /**
  *
  * @author p2008444
  */
-public class Page5 extends JPanel{
+public class Infusion extends JPanel{
     
-    JLabel heure;
-    JComboBox listeHeures;
-    JButton selection;
-    JCheckBox[] listeCheckBox;
-    JLabel[] joursSemaine;
+    JFrame owner;
     
-    public Page5() {
-        
+    JLabel titreThe;
+    JLabel description;
+    JButton infuser;
+    //Slider
+    JLabel tempsRestant;
+    JProgressBar progressTime;
+    
+    
+    public Infusion(JFrame o) {
+        this.owner = o;
     }
+    
     
 }
