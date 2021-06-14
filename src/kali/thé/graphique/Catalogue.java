@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import kali.thé.modele.The;
 
 /**
@@ -25,13 +26,14 @@ public class Catalogue extends JPanel implements ActionListener{
     Menu owner;
     JButton[] tabTheButton;
     ArrayList<The> tabThe;
+    JScrollPane scrollPane;
     
     
     public Catalogue(Menu o) {
         this.owner = o;
         tabThe = new ArrayList<The>();
         
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 20; i++){
             
             tabThe.add(new The(10, "The " + i, 50, "Desc" + i));
         }

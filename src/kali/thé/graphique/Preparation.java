@@ -53,10 +53,12 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         GridBagConstraints cont = new GridBagConstraints();
         
         temperaturePrepa = new JLabel("Temperature de prepartion");
-        temperature = new JLabel("100°C");
+        temperature = new JLabel("°C");
         
         slider1 = new JSlider();
         slider1.setPreferredSize(new Dimension(300,20));
+        slider1.setMaximum(120);
+        slider1.setMinimum(30);
         slider1.addChangeListener(e-> temperature.setText(String.valueOf(slider1.getValue()) + "°C"));
         
         tempsPrep = new JLabel("Temps de préparation");
