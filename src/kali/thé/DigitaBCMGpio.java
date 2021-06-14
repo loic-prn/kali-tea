@@ -56,7 +56,6 @@ public class DigitaBCMGpio implements Execute{
         try {
             Thread.sleep(1000);
             pin.high();
-            int i = 0;
             Thread.sleep(1000000000);
         
         }catch (InterruptedException ex) {
