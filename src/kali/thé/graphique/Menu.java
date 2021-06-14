@@ -66,11 +66,11 @@ public class Menu extends JFrame{
         
         menu.setPreferredSize(new Dimension(720,50));
         
-        cont.anchor = GridBagConstraints.WEST;
+        cont.anchor = GridBagConstraints.FIRST_LINE_START;
         cont.gridx = 0; cont.gridy = 0;
         menu.add(retour,cont);
         
-        //cont.anchor = GridBagConstraints.EAST;
+        cont.anchor = GridBagConstraints.FIRST_LINE_END;
         cont.gridx = 1; cont.gridy = 0;
         menu.add(heure,cont);
     }

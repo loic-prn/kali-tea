@@ -10,20 +10,14 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.layout.FlowPane;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.JSlider;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
 import kali.thé.modele.The;
 
 /**
@@ -41,7 +35,6 @@ public class Infusion extends JPanel implements ActionListener{
     //Slider
     JLabel tempsRestant;
     JProgressBar progressTime;
-    FlowPane flowPane;
     JScrollPane scrollPane;
     
     

@@ -119,13 +119,16 @@ public class Preparation extends JPanel implements ActionListener{
         cont.fill = GridBagConstraints.CENTER;
         cont.gridy = 7;
         this.add(tempsRestant,cont);
-        
-        
-             
+            
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
 }
