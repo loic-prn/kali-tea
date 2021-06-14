@@ -142,6 +142,6 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

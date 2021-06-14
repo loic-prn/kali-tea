@@ -5,12 +5,18 @@
  */
 package kali.thé.graphique;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +38,8 @@ public class Menu extends JFrame implements ActionListener{
     //menu
     JPanel menu;
     JButton retour;
-    JLabel heure;    
+    JLabel heure;
+    JLabel title;
     
     /**
      * 
@@ -45,37 +52,58 @@ public class Menu extends JFrame implements ActionListener{
         this.list = new ArrayList<>();
         this.proglist = null;
        
+        //timer pour heure
+        javax.swing.Timer t = new javax.swing.Timer(1000, new ClockListener());
+        t.start();
        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setPano(new Accueil(this));
     }
     
-    public void setPano(JPanel j){
-        pano = j;
-        initPan();
+    class ClockListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+            Date date = new Date();
+            initPan(df.format(Calendar.getInstance().getTime()));
+        }
     }
     
-    private void initMenu(){
+    public void setPano(JPanel j){
+        pano = j;
+        SimpleDateFormat s = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        initPan(s.format(date));
+    }
+    
+    private void initMenu(String heure){
         menu = new JPanel();
         retour = new JButton("retour");
-        heure = new JLabel("15:40");
         retour.addActionListener(this);
+        retour.setBackground(Color.white);
+        this.heure = new JLabel(heure);
+        title = new JLabel("Kali-Thé");
+        title.setFont(new Font("Arial",Font.CENTER_BASELINE,35));
         
         menu.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         menu.setPreferredSize(new Dimension(720,50));
+        menu.setBackground(Color.white);
         
-        cont.fill = GridBagConstraints.HORIZONTAL;
-        cont.anchor = GridBagConstraints.NORTHWEST;
+        cont.insets = new Insets(0,0,0,500);
         cont.gridx = 0; cont.gridy = 0;
         menu.add(retour,cont);
-        cont.gridx = 1; cont.gridy = 0;
-        menu.add(heure,cont);
+        
+        cont.insets = new Insets(0,0,0,0);
+        cont.gridx = 10; cont.gridy = 0;
+        menu.add(this.heure,cont);
+        cont.gridheight = 2;
+        cont.gridx = 0; cont.gridy = 0;
+        menu.add(title,cont);
     }
     
-    private void initPan(){
-        initMenu();
+    private void initPan(String heure){
+        initMenu(heure);
         JPanel panTemp = new JPanel();
         panTemp.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();        
