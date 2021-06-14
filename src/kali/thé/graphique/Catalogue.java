@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import kali.thé.modele.The;
 
 /**
@@ -33,7 +34,7 @@ public class Catalogue extends JPanel implements ActionListener{
         this.owner = o;
         tabThe = new ArrayList<The>();
         
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 100; i++){
             
             tabThe.add(new The(10, "The " + i, 50, "Desc" + i));
         }
@@ -46,25 +47,35 @@ public class Catalogue extends JPanel implements ActionListener{
         owner.setTitle("Catalogue");
         
         this.setLayout(new GridBagLayout());
-        GridBagConstraints cont = new GridBagConstraints();
         
-
-        cont.fill = GridBagConstraints.BOTH;
-        cont.gridx = 0;
+        JPanel pane = new JPanel();
+        pane.setLayout(new GridBagLayout());
+        GridBagConstraints cont2 = new GridBagConstraints();
+        cont2.fill = GridBagConstraints.BOTH;
+        cont2.gridx = 0;
         
-
+        
         
         for(int i = 0; i < tabThe.size(); i++){
             tabTheButton[i] = new JButton(tabThe.get(i).getNom());
             tabTheButton[i].addActionListener(this);
-            cont.gridy = i;
-            this.add(tabTheButton[i], cont);   
-            
-            
-            
+            tabTheButton[i].setPreferredSize(new Dimension(282,30));
+            cont2.gridy = i;
+            pane.add(tabTheButton[i], cont2); 
         }
         
-         
+        
+        JScrollPane scrollPane = new JScrollPane(pane);
+        scrollPane.setPreferredSize(new Dimension(300,400));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        
+        GridBagConstraints cont = new GridBagConstraints();
+        cont.fill = GridBagConstraints.BOTH;
+        cont.gridx = 0;
+        cont.gridy = 0;
+        this.add(scrollPane, cont);
     }
 
     @Override

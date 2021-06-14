@@ -34,7 +34,7 @@ public class Param extends JPanel{
     }
     
     private void init(){
-        owner.setTitle("Parametre");
+        owner.setTitle("Paramètres");
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();

@@ -150,7 +150,19 @@ public class Menu extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == retour){
-            
+            if (pano.getClass() == Accueil.class){}
+            else if (pano.getClass() == Catalogue.class){
+                this.setPano(new Accueil(this));
+            }
+            else if (pano.getClass() == Programmation.class){
+                this.setPano(new Accueil(this));
+            }
+            else if (pano.getClass() == Param.class){
+                this.setPano(new Accueil(this));
+            }
+            else if (pano.getClass() == Preparation.class){
+                this.setPano(new Accueil(this));
+            }
         }
     }
     
