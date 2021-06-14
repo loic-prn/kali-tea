@@ -5,8 +5,12 @@
  */
 package kali.thé.graphique;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,16 +19,16 @@ import javax.swing.JPanel;
  *
  * @author p2008444
  */
-public class Accueil extends JPanel{
+public class Accueil extends JPanel implements ActionListener{
     
-    JFrame owner;
+    Menu owner;
     
     JButton catalogue;
     JButton infuProgrammé;
     JButton Param;
     
     
-    public Accueil(JFrame o) {
+    public Accueil(Menu o){
         this.owner = o;      
         this.init();
     }
@@ -32,17 +36,43 @@ public class Accueil extends JPanel{
     private void init(){
         
         //inits
-        catalogue = new JButton("Catalogue");
+        catalogue = new JButton("Catalogue de thés");
+        catalogue.setBackground(Color.blue);
+        catalogue.addActionListener(this);
+        infuProgrammé = new JButton("Infusion programmées");
+        infuProgrammé.setBackground(Color.blue);
+        infuProgrammé.addActionListener(this);
+        Param = new JButton("Paramètres");
+        Param.setBackground(Color.blue);
+        Param.addActionListener(this);
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Accueil");
         
+        cont.fill = GridBagConstraints.BOTH;
+        cont.insets = new Insets(20,0,20,0);
+        
         cont.gridx = 0;
         cont.gridy = 0;
-        this.add(catalogue, cont);        
+        this.add(catalogue, cont);
+        
+        cont.gridx = 0;
+        cont.gridy = 1;
+        this.add(infuProgrammé, cont);   
+        
+        cont.gridx = 0;
+        cont.gridy = 2;
+        this.add(Param, cont);           
     }
-    
-    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == catalogue){
+            System.out.println("works");
+            owner.setPano(new Infusion(owner));
+        }
+    }
+        
     
 }
