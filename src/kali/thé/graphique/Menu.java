@@ -87,7 +87,7 @@ public class Menu extends JFrame implements ActionListener{
         
         menu.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
-        menu.setPreferredSize(new Dimension(720,50));
+        menu.setPreferredSize(new Dimension(longueur,50));
         menu.setBackground(Color.white);
         
         cont.insets = new Insets(0,0,0,500);

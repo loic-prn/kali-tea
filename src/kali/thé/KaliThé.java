@@ -22,7 +22,7 @@ public class KaliThé {
      */
     public static void main(String[] args) {
         // truc
-        Menu me = new Menu(720,480);
+        Menu me = new Menu(790,430);
         me.setVisible(true);
     }
     
