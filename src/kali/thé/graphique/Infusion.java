@@ -41,6 +41,7 @@ public class Infusion extends JPanel implements ActionListener{
     public Infusion(Menu o, The t) {
         this.owner = o;
         this.t = t;
+        this.setBackground(Color.white);
         init();
     }
     private void init(){

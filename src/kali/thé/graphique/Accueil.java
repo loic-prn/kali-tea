@@ -32,7 +32,8 @@ public class Accueil extends JPanel implements ActionListener{
     
     
     public Accueil(Menu o){
-        this.owner = o;      
+        this.owner = o;   
+        this.setBackground(Color.white);
         this.init();
     }
     

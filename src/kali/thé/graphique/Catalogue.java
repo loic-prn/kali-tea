@@ -5,6 +5,7 @@
  */
 package kali.thé.graphique;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -32,6 +33,7 @@ public class Catalogue extends JPanel implements ActionListener{
     
     public Catalogue(Menu o) {
         this.owner = o;
+        this.setBackground(Color.white);
         tabThe = new ArrayList<The>();
         
         for (int i = 0; i < 100; i++){

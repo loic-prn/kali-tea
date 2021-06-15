@@ -42,6 +42,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     
     public Preparation(Menu o) {
         this.owner = o;
+        this.setBackground(Color.white);
         this.init();
     }
     
