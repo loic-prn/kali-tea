@@ -12,6 +12,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -42,11 +45,11 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     JLabel tempsRestant;
     JLabel printHour;
     
-    
-    private String chaineSec ="";
-    private String chaineMin="";
-    
-    private double tRestant;
+    int percentageComplete = 0;
+    int cpt = 0;
+    int tempsmin = 0;
+    int tempssec = 0;
+        
     
     
     public Preparation(Menu o) {
@@ -56,6 +59,8 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     }
     
     private void init(){
+        this.removeAll();
+        
         owner.setTitle("Préparation");
         owner.retour.setEnabled(true);
         owner.title.setVisible(true);
@@ -74,24 +79,21 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         
         tempsPrep = new JLabel("Temps de préparation");
         secondes = new JSpinner(new SpinnerNumberModel(0,0,60,1));
+        secondes.setValue(tempssec);
         secondes.addChangeListener(this);
         minutes = new JSpinner(new SpinnerNumberModel(0,0,60,1));
+        minutes.setValue(tempsmin);
         minutes.addChangeListener(this);
         preparer = new JButton("Préparer");
         preparer.setBackground(Color.blue);
         preparer.setForeground(Color.white);
         preparer.addActionListener(this);
         progressPrep = new JProgressBar();
+        progressPrep.setValue(percentageComplete);
         progressPrep.setPreferredSize(new Dimension(200,20));
         progressPrep.setForeground(Color.red);
-        progressPrep.setValue(20);
-        tempsRestant = new JLabel("Temps restant : 1 min");
-        printHour = new JLabel(":");
-        
-        
-        
-
-
+        printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
+        tempsRestant = new JLabel("Temps restant : " + Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         
         cont.fill = GridBagConstraints.CENTER;
         cont.gridx = 0;
@@ -99,7 +101,6 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         cont.gridwidth = 2;
         cont.insets = new Insets(5,0,5,0);
         this.add(temperaturePrepa,cont);
-        
         
         cont.gridy = 1;
         this.add(slider1,cont);
@@ -167,12 +168,22 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             
     }
 
+    class ClockListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(percentageComplete <= 100){
+                cpt++;
+                percentageComplete = cpt/((int)secondes.getValue()+(int)minutes.getValue()*60);
+                init();
+            }
+        }
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==preparer){
             //double temps = (Double.parseDouble(chaineHeures) * 60) + (Double.parseDouble(chaineMin));
-            int tempsmin = (int)minutes.getValue();
-            int tempssec = (int)secondes.getValue();
+            tempsmin = (int)minutes.getValue();
+            tempssec = (int)secondes.getValue();
             double temps = tempsmin + Double.valueOf(tempssec)/60;
             
             
@@ -182,7 +193,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             System.out.println("\n");
             System.out.println("Thé crée : \n" + "temps : " + temps + "\n" + "temperature : " + slider1.getValue());
             
-            
+            //timer pour heure
+            javax.swing.Timer t = new javax.swing.Timer(100, new Preparation.ClockListener());
+            t.start();
         }
     }
     
@@ -194,12 +207,12 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     @Override
     public void stateChanged(ChangeEvent e) {
         if(e.getSource() == minutes){
-            chaineMin = minutes.getValue().toString();
-            printHour.setText(chaineMin + " : " + chaineSec);
+            tempsmin = (int)minutes.getValue();
+            printHour.setText(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         }
         else if(e.getSource() == secondes){
-            chaineSec = secondes.getValue().toString();
-            printHour.setText(chaineMin + " : " + chaineSec);
+            tempssec = (int)secondes.getValue();
+            printHour.setText(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         }
         
     }
