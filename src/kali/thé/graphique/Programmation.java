@@ -20,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.PopupFactory;
+import kali.thé.modele.The;
 
 /**
  *
@@ -34,12 +36,14 @@ public class Programmation extends JPanel implements ActionListener{
     JButton selection;
     JCheckBox[] listeCheckBox;
     JLabel[] joursSemaine;
+    JLabel theChoisit;
     
     String[] joursDeLaSemaine = { "Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche" };
     
     public Programmation(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
+        theChoisit = new JLabel("");
         this.init();
     }
     
@@ -73,10 +77,13 @@ public class Programmation extends JPanel implements ActionListener{
         cont.gridx = 0;
         cont.gridy = 3;
         this.add(selection, cont);
+        cont.gridx = 0;
+        cont.gridy = 4;
+        this.add(theChoisit, cont);
         cont.insets = new Insets(0,0,0,0);
         for (int i=0; i<7; i++){
             cont.gridx = 0;
-            cont.gridy = 4+i;
+            cont.gridy = 5+i;
             this.add(listeCheckBox[i], cont);
         }
           
@@ -84,13 +91,15 @@ public class Programmation extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        The temp = null;
         if (e.getSource() == selection){
-            JDialog dialog = new JDialog();
-            dialog.add(new Catalogue(owner));
-            dialog.pack();
-            dialog.show();
+            PopupCatalogue fen = new PopupCatalogue(new Catalogue(owner), this.owner);
+            temp = fen.showDialog();
         }
-        
+        if (temp != null){
+                theChoisit.setText(temp.getNom());
+                this.init();
+            }
     }
     
     @Override

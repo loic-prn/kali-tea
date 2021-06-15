@@ -69,12 +69,13 @@ public class Accueil extends JPanel implements ActionListener{
         owner.retour.setEnabled(false);
         
         cont.fill = GridBagConstraints.BOTH;
-        cont.insets = new Insets(15,0,15,0);
+        cont.insets = new Insets(0,0,15,25);
         
         cont.gridx = 0;
         cont.gridy = 0;
         this.add(logo, cont);
         
+        cont.insets = new Insets(15,0,15,0);
         cont.gridx = 0;
         cont.gridy = 1;
         this.add(catalogue, cont);
