@@ -123,6 +123,8 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         cont.anchor = GridBagConstraints.EAST;
         cont.insets = new Insets(0,0,5,0);
         cont.gridy = 4;
+        cont.ipady = 20;
+        cont.ipadx = 30;
         this.add(minutes,cont);
        
         
@@ -131,6 +133,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         cont.gridx = 1;
         this.add(secondes,cont);
       
+        cont.ipady = 0;
         cont.weightx = 0;
         cont.ipadx = 0;
         cont.anchor = GridBagConstraints.CENTER;
