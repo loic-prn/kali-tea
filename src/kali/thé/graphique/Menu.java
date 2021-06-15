@@ -61,6 +61,7 @@ public class Menu extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         retour = new JButton();
+         title = new JLabel("   Kali-Thé");
         this.setPano(new Accueil(this));
     }
     
@@ -87,7 +88,6 @@ public class Menu extends JFrame implements ActionListener{
         retour.addActionListener(this);
         retour.setBackground(Color.white);
         this.heure = new JLabel(heure);
-        title = new JLabel("Kali-Thé");
         title.setFont(new Font("Arial",Font.CENTER_BASELINE,35));
         
         menu.setLayout(new GridBagLayout());

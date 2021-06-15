@@ -48,6 +48,7 @@ public class Catalogue extends JPanel implements ActionListener{
     private void init(){
         owner.setTitle("Catalogue");
         owner.retour.setEnabled(true);
+        owner.title.setVisible(true);
         
         this.setLayout(new GridBagLayout());
         

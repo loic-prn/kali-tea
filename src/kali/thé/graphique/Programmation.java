@@ -15,8 +15,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -47,6 +49,7 @@ public class Programmation extends JPanel implements ActionListener{
         heure = new JLabel("Pour quelle heure:");
         listeHeures = new JComboBox();
         selection = new JButton("Selectionner un thé");
+        selection.addActionListener(this);
         listeCheckBox = new JCheckBox[7];
         for (int i=0; i<7; i++){
             listeCheckBox[i] = new JCheckBox(joursDeLaSemaine[i]);
@@ -56,6 +59,7 @@ public class Programmation extends JPanel implements ActionListener{
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Infusion programmée");
         owner.retour.setEnabled(true);
+        owner.title.setVisible(true);
         
         cont.fill = GridBagConstraints.BOTH;
                 
@@ -81,7 +85,10 @@ public class Programmation extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == selection){
-            owner.setPano(new Catalogue(owner));
+            JDialog dialog = new JDialog();
+            dialog.add(new Catalogue(owner));
+            dialog.pack();
+            dialog.show();
         }
         
     }
