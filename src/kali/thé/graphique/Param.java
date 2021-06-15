@@ -48,7 +48,7 @@ public class Param extends JPanel{
         timeSwap = new JButton("      Changer l'heure");
         majThe = new JButton("      Mettre à jour les thés");
         majLog = new JButton("      Mettre à jour le logiciel");
-        wifi = new JButton("      Connxeion WiFi");
+        wifi = new JButton("      Connexion WiFi");
         language = new JButton("      Langue du système");
         ImageIcon horloge = new ImageIcon(getClass().getResource("/icones/clock2.png"));
         ImageIcon languageIcon = new ImageIcon(getClass().getResource("/icones/language.png"));
