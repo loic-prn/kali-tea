@@ -48,6 +48,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     
     private void init(){
         owner.setTitle("Préparation");
+        owner.retour.setEnabled(true);
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();

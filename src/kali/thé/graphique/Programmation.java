@@ -55,6 +55,7 @@ public class Programmation extends JPanel implements ActionListener{
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Infusion programmée");
+        owner.retour.setEnabled(true);
         
         cont.fill = GridBagConstraints.BOTH;
                 

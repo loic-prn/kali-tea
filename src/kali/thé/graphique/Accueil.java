@@ -60,6 +60,7 @@ public class Accueil extends JPanel implements ActionListener{
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Accueil");
+        owner.retour.setEnabled(false);
         
         cont.fill = GridBagConstraints.BOTH;
         cont.insets = new Insets(15,0,15,0);

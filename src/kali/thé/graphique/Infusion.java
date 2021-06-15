@@ -65,6 +65,7 @@ public class Infusion extends JPanel implements ActionListener{
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Infusion");
+        owner.retour.setEnabled(true);
         
         
         cont.insets = new Insets(10,0,10,0);

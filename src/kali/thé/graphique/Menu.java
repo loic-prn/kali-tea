@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -58,6 +60,7 @@ public class Menu extends JFrame implements ActionListener{
        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        retour = new JButton();
         this.setPano(new Accueil(this));
     }
     
@@ -77,8 +80,10 @@ public class Menu extends JFrame implements ActionListener{
     }
     
     private void initMenu(String heure){
+        ImageIcon retourIcon = new ImageIcon(getClass().getResource("/icones/return.png"));
         menu = new JPanel();
-        retour = new JButton("retour");
+        retour.setIcon(retourIcon);
+        retour.setBorder(BorderFactory.createLineBorder(Color.white));
         retour.addActionListener(this);
         retour.setBackground(Color.white);
         this.heure = new JLabel(heure);
