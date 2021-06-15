@@ -37,6 +37,7 @@ public class Programmation extends JPanel implements ActionListener{
     
     public Programmation(Menu o) {
         this.owner = o;
+        this.setBackground(Color.white);
         this.init();
     }
     
