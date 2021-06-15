@@ -49,8 +49,10 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     int cpt = 0;
     int tempsmin = 0;
     int tempssec = 0;
-        
+    double temps = 0.0;
+    int temperatureGET = 0;
     
+    javax.swing.Timer timer;
     
     public Preparation(Menu o) {
         this.owner = o;
@@ -69,13 +71,14 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         GridBagConstraints cont = new GridBagConstraints();
         
         temperaturePrepa = new JLabel("Temperature de prepartion");
-        temperature = new JLabel("°C");
         
         slider1 = new JSlider();
         slider1.setPreferredSize(new Dimension(300,20));
         slider1.setMaximum(120);
         slider1.setMinimum(30);
-        slider1.addChangeListener(e-> temperature.setText(String.valueOf(slider1.getValue()) + "°C"));
+        slider1.addChangeListener(this);
+        temperature = new JLabel(Integer.toString(temperatureGET) + "°C");
+        slider1.setValue(temperatureGET);
         
         tempsPrep = new JLabel("Temps de préparation");
         secondes = new JSpinner(new SpinnerNumberModel(0,0,60,1));
@@ -93,7 +96,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         progressPrep.setPreferredSize(new Dimension(200,20));
         progressPrep.setForeground(Color.red);
         printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
-        tempsRestant = new JLabel("Temps restant : " + Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
+        tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
         
         cont.fill = GridBagConstraints.CENTER;
         cont.gridx = 0;
@@ -170,22 +173,31 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
 
     class ClockListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if(percentageComplete <= 100){
+            if((cpt*100/(int)(temps*60) < 100)){
                 cpt++;
-                percentageComplete = cpt/((int)secondes.getValue()+(int)minutes.getValue()*60);
+                percentageComplete = (cpt*100/(int)(temps*60));
                 init();
+                owner.retour.setEnabled(false);
+                preparer.setEnabled(false);
+            }
+            else if ((cpt*100/(int)(temps*60) == 100)){
+                timer.stop();
+                cpt = 0;
+                percentageComplete = 0;
+                owner.retour.setEnabled(true);
+                preparer.setEnabled(true);
             }
         }
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         if(e.getSource()==preparer){
             //double temps = (Double.parseDouble(chaineHeures) * 60) + (Double.parseDouble(chaineMin));
             tempsmin = (int)minutes.getValue();
             tempssec = (int)secondes.getValue();
-            double temps = tempsmin + Double.valueOf(tempssec)/60;
-            
+            temps = tempsmin + Double.valueOf(tempssec)/60;
             
             System.out.println(temps);
             The theManuel = new The(temps,"",slider1.getValue(),"");
@@ -194,8 +206,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             System.out.println("Thé crée : \n" + "temps : " + temps + "\n" + "temperature : " + slider1.getValue());
             
             //timer pour heure
-            javax.swing.Timer t = new javax.swing.Timer(100, new Preparation.ClockListener());
-            t.start();
+            timer = new javax.swing.Timer(1000, new Preparation.ClockListener());
+            timer.start();
+            
         }
     }
     
@@ -214,6 +227,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             tempssec = (int)secondes.getValue();
             printHour.setText(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         }
-        
+        else if (e.getSource() == slider1){
+            temperature.setText(String.valueOf(slider1.getValue()) + "°C");
+            temperatureGET = slider1.getValue();
+        }
     }
 }
