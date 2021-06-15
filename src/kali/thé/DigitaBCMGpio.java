@@ -57,10 +57,15 @@ public class DigitaBCMGpio implements Execute{
         try {
             Thread.sleep(1000);
             pin.high();
-            Thread.sleep(1000000000);
+            Thread.sleep(10000);
+            pin.low();
+            Thread.sleep(1000);
+            pin.toggle();
+            Thread.sleep(1000);
         
         }catch (InterruptedException ex) {
             Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("PITIE");
         }
     }
 
@@ -69,8 +74,8 @@ public class DigitaBCMGpio implements Execute{
     
     public static void main(String[] args) throws InterruptedException {
     // test unitaire sur GPIO_16
-        DigitaBCMGpio digitaBCMGpio = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
-        digitaBCMGpio.start();
+        //DigitaBCMGpio digitaBCMGpio = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        //digitaBCMGpio.start();
     }
 }
 
