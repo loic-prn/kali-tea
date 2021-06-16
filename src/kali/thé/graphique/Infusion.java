@@ -12,6 +12,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +39,15 @@ public class Infusion extends JPanel implements ActionListener{
     JProgressBar progressTime;
     JScrollPane scrollPane;
     
+    int percentageComplete = 0;
+    int cpt = 0;
+    double temps = 0.0;
+    int temperatureGET = 0;
+    int tempsmin = 0;
+    int tempssec = 0;
+    
+    javax.swing.Timer timer;
+    
     /**
      * Infusion constructor.
      * @param o the parent menu.
@@ -45,6 +56,8 @@ public class Infusion extends JPanel implements ActionListener{
     public Infusion(Menu o, The t) {
         this.owner = o;
         this.t = t;
+        temps = t.getTempsInfusion();
+        temperatureGET = t.getTemperature();
         this.setBackground(Color.white);
         init();
     }
@@ -52,7 +65,7 @@ public class Infusion extends JPanel implements ActionListener{
      * This function just help the constructor to be simpler to read.
      */
     private void init(){
-        
+        this.removeAll();
         //inits
         titreThe = new JLabel(t.getNom());
         description = new JLabel(t.getDescription());
@@ -63,11 +76,14 @@ public class Infusion extends JPanel implements ActionListener{
         
                 
         infuser = new JButton("Infuser");
+        infuser.addActionListener(this);
         progressTime = new JProgressBar();
-        progressTime.setValue(5);
+        progressTime.setValue(percentageComplete);
         progressTime.setForeground(Color.red);
-        progressTime.setString("50 %");
-        tempsRestant = new JLabel("Temps restant: " + Double.toString(t.getTempsInfusion()) + " mins");
+        tempsmin = (int)t.getTempsInfusion();
+        double temp = t.getTempsInfusion() - tempsmin;
+        tempssec = (int)(temp*60);
+        tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
@@ -96,6 +112,37 @@ public class Infusion extends JPanel implements ActionListener{
         cont.fill = GridBagConstraints.NONE;
         this.add(tempsRestant, cont);
     }
+    
+    /**
+     * This function will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time.
+     */
+    class ClockListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if((cpt*100/(int)(temps*60) < 100)){
+                cpt++;
+                percentageComplete = (cpt*100/(int)(temps*60));
+                init();
+                owner.retour.setEnabled(false);
+                infuser.setEnabled(false);
+//                owner.led.start();
+            }
+            else if ((cpt*100/(int)(temps*60) == 100)){
+                timer.stop();
+                cpt = 0;
+                percentageComplete = 0;
+                owner.retour.setEnabled(true);
+                infuser.setEnabled(true);
+//                owner.led.stop();
+//                owner.b.start();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//                owner.b.stop();
+            }
+        }
+    }
 
     /**
      * 
@@ -103,8 +150,8 @@ public class Infusion extends JPanel implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-           
+        timer = new javax.swing.Timer(1000, new Infusion.ClockListener());
+        timer.start();
     }
     
     /**
