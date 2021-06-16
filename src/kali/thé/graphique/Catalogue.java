@@ -31,6 +31,7 @@ public class Catalogue extends JPanel implements ActionListener{
     JScrollPane scrollPane;
     
     
+    
     public Catalogue(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
@@ -42,6 +43,7 @@ public class Catalogue extends JPanel implements ActionListener{
         }
         
         tabTheButton = new JButton[tabThe.size()];
+        
         this.init();
     }
     
@@ -84,7 +86,11 @@ public class Catalogue extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        for(int i = 0; i < tabThe.size() ; i++){
+            if(e.getSource() == tabTheButton[i]){
+                    owner.setPano(new Infusion(owner, tabThe.get(i)));
+            }
+        }
     }
     
     @Override

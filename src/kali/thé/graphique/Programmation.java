@@ -32,29 +32,49 @@ public class Programmation extends JPanel implements ActionListener{
     Menu owner;
     
     JLabel heure;
-    JComboBox listeHeures;
+    JLabel heureChoisie;
     JButton selection;
     JCheckBox[] listeCheckBox;
     JLabel[] joursSemaine;
     JLabel theChoisit;
+    JComboBox heures;
+    JComboBox minutes;
     
+    Integer[] h;
+    Integer[] m;
     String[] joursDeLaSemaine = { "Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche" };
+    
     
     public Programmation(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
-        theChoisit = new JLabel("");
+        
+        
         this.init();
     }
     
     private void init(){
         this.removeAll();
         //inits
+        m = new Integer[61];
+        h = new Integer[25];
+        theChoisit = new JLabel("");
         heure = new JLabel("Pour quelle heure:");
-        listeHeures = new JComboBox();
+        heureChoisie = new JLabel("Programmé pour: ");
+        heures = new JComboBox(h);
+        minutes = new JComboBox(m);
         selection = new JButton("Selectionner un thé");
         selection.addActionListener(this);
         listeCheckBox = new JCheckBox[7];
+        
+        for(int i = 0; i < 61; i ++){
+            m[i] = i;
+        }
+        
+        for(int i = 0; i < 25; i++){
+            h[i] = i;
+        }
+        
         for (int i=0; i<7; i++){
             listeCheckBox[i] = new JCheckBox(joursDeLaSemaine[i]);
         }
@@ -66,24 +86,45 @@ public class Programmation extends JPanel implements ActionListener{
         owner.title.setVisible(true);
         
         cont.fill = GridBagConstraints.BOTH;
-                
+        cont.gridwidth = 2;
         cont.gridx = 0;
         cont.gridy = 0;
         this.add(heure, cont);
+        
+        cont.ipadx = 60;
+        cont.gridwidth = 1;
         cont.gridx = 0;
         cont.gridy = 1;
-        this.add(listeHeures, cont);
+        this.add(heures, cont);
+        
+        cont.gridwidth = 1;
+        cont.gridx = 1;
+        cont.gridy = 1;
+        this.add(minutes, cont);
+        
+        
+        cont.fill = GridBagConstraints.CENTER;
+        cont.weightx = 0;
+        cont.ipadx = 0;
+        cont.gridwidth = 2;
         cont.insets = new Insets(20,0,20,0);
+        cont.gridx = 0;
+        cont.gridy = 2;
+        this.add(heureChoisie,cont);
+        
+        cont.fill = GridBagConstraints.BOTH;
+        cont.gridwidth = 2;
         cont.gridx = 0;
         cont.gridy = 3;
         this.add(selection, cont);
+        
         cont.gridx = 0;
         cont.gridy = 4;
         this.add(theChoisit, cont);
         cont.insets = new Insets(0,0,0,0);
         for (int i=0; i<7; i++){
             cont.gridx = 0;
-            cont.gridy = 5+i;
+            cont.gridy = 6+i;
             this.add(listeCheckBox[i], cont);
         }
           

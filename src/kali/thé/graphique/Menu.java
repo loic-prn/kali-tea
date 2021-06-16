@@ -196,6 +196,10 @@ public class Menu extends JFrame implements ActionListener{
             else if (pano.getClass() == Preparation.class){
                 this.setPano(new Accueil(this));
             }
+            else if(pano.getClass() == Infusion.class){
+                this.setPano(new Accueil(this));
+            }
+            
         }
     }
     
