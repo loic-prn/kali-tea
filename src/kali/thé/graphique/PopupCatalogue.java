@@ -23,13 +23,13 @@ public class PopupCatalogue extends JDialog implements ActionListener{
     
     public PopupCatalogue(Catalogue j, JFrame owner){
         
+        super(owner,true);
         this.j = j;
         this.add(j);
         this.pack();
         for (int i=0; i<j.tabTheButton.length; i++){
             j.tabTheButton[i].addActionListener(this);
         }
-        this.setVisible(true);
     }
     
     public The showDialog(){
@@ -41,8 +41,8 @@ public class PopupCatalogue extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         for (int i=0; i<j.tabTheButton.length; i++){
             if (e.getSource() == j.tabTheButton[i]){
-                this.setVisible(false);
                 ret = new The(j.tabThe.get(i).getTempsInfusion(),Integer.toString(i),j.tabThe.get(i).getTemperature(),j.tabThe.get(i).getDescription());
+                this.setVisible(false);
             }
         }
     }

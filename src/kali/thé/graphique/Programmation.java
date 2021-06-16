@@ -48,7 +48,7 @@ public class Programmation extends JPanel implements ActionListener{
     }
     
     private void init(){
-        
+        this.removeAll();
         //inits
         heure = new JLabel("Pour quelle heure:");
         listeHeures = new JComboBox();
@@ -95,11 +95,12 @@ public class Programmation extends JPanel implements ActionListener{
         if (e.getSource() == selection){
             PopupCatalogue fen = new PopupCatalogue(new Catalogue(owner), this.owner);
             temp = fen.showDialog();
-        }
-        if (temp != null){
+            if (temp != null){
                 theChoisit.setText(temp.getNom());
                 this.init();
             }
+        }
+        
     }
     
     @Override
