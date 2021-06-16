@@ -26,7 +26,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import kali.thé.DigitaBCMGpio;
+import kali.thé.LED;
 import kali.thé.modele.The;
 
 /**
@@ -56,12 +56,12 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     
     javax.swing.Timer timer;
     //led
-    DigitaBCMGpio digitaBCMGpio;
+    LED digitaBCMGpio;
     
     public Preparation(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
-        digitaBCMGpio = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        digitaBCMGpio = new LED(RaspiBcmPin.GPIO_16);
         digitaBCMGpio.stop();
         this.init();
     }
