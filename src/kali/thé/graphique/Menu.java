@@ -8,6 +8,7 @@ package kali.thé.graphique;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -61,7 +62,7 @@ public class Menu extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         retour = new JButton();
-         title = new JLabel("   Kali-Thé");
+        title = new JLabel("   Kali-Thé");
         this.setPano(new Accueil(this));
     }
     
@@ -69,7 +70,7 @@ public class Menu extends JFrame implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             SimpleDateFormat df = new SimpleDateFormat("HH:mm");
             Date date = new Date();
-            initPan(df.format(Calendar.getInstance().getTime()));
+            repaintMenu(df.format(Calendar.getInstance().getTime()));
         }
     }
     
@@ -119,6 +120,13 @@ public class Menu extends JFrame implements ActionListener{
         panTemp.add(pano,cont);
         
         this.setContentPane(panTemp);
+        this.pack();
+    }
+    
+    public void repaintMenu(String heure){
+        this.remove(menu);
+        initMenu(heure);
+        this.add(menu);
         this.pack();
     }
     
