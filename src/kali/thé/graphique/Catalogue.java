@@ -29,10 +29,12 @@ public class Catalogue extends JPanel implements ActionListener{
     JButton[] tabTheButton;
     ArrayList<The> tabThe;
     JScrollPane scrollPane;
+    public boolean popup;
     
     
     
-    public Catalogue(Menu o) {
+    public Catalogue(Menu o, boolean pop) {
+        popup = pop;
         this.owner = o;
         this.setBackground(Color.white);
         tabThe = new ArrayList<The>();
@@ -87,7 +89,7 @@ public class Catalogue extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         for(int i = 0; i < tabThe.size() ; i++){
-            if(e.getSource() == tabTheButton[i]){
+            if(!popup && e.getSource() == tabTheButton[i]){
                     owner.setPano(new Infusion(owner, tabThe.get(i)));
             }
         }

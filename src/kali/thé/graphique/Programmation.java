@@ -49,7 +49,7 @@ public class Programmation extends JPanel implements ActionListener{
         this.owner = o;
         this.setBackground(Color.white);
         
-        
+        theChoisit = new JLabel("");
         this.init();
     }
     
@@ -58,7 +58,6 @@ public class Programmation extends JPanel implements ActionListener{
         //inits
         m = new Integer[61];
         h = new Integer[25];
-        theChoisit = new JLabel("");
         heure = new JLabel("Pour quelle heure:");
         heureChoisie = new JLabel("Programmé pour: ");
         heures = new JComboBox(h);
@@ -134,7 +133,7 @@ public class Programmation extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         The temp = null;
         if (e.getSource() == selection){
-            PopupCatalogue fen = new PopupCatalogue(new Catalogue(owner), this.owner);
+            PopupCatalogue fen = new PopupCatalogue(new Catalogue(owner,true), this.owner);
             temp = fen.showDialog();
             if (temp != null){
                 theChoisit.setText(temp.getNom());

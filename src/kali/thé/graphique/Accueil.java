@@ -96,7 +96,7 @@ public class Accueil extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == catalogue){
-            owner.setPano(new Catalogue(owner));
+            owner.setPano(new Catalogue(owner,false));
         }
         else if (e.getSource() == infuProgrammé){
             owner.setPano(new Programmation(owner));
