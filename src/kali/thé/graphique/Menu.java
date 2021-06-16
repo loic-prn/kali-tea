@@ -5,6 +5,7 @@
  */
 package kali.thé.graphique;
 
+import com.pi4j.io.gpio.RaspiBcmPin;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,6 +25,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import kali.thé.DigitaBCMGpio;
+import kali.thé.LED;
 import kali.thé.modele.*;
 
 /**
@@ -44,12 +47,17 @@ public class Menu extends JFrame implements ActionListener{
     JLabel heure;
     JLabel title;
     
+    DigitaBCMGpio led;
+    
     /**
      * 
      * @param longueur longueur de la fenetre
      * @param largeur  largeur de la fenetre
      */
     public Menu(int longueur, int largeur) {
+        led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        led.stop();
+        
         this.longueur = longueur;
         this.largeur = largeur;
         this.list = new ArrayList<>();

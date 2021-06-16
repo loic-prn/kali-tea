@@ -93,6 +93,7 @@ public class Programmation extends JPanel implements ActionListener{
         
         for (int i=0; i<7; i++){
             listeCheckBox[i] = new JCheckBox(joursDeLaSemaine[i]);
+            listeCheckBox[i].setBackground(Color.white);
         }
         
         this.setLayout(new GridBagLayout());
