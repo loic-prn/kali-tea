@@ -5,6 +5,7 @@
  */
 package kali.thé.graphique;
 
+import com.pi4j.io.gpio.RaspiBcmPin;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -25,6 +26,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import kali.thé.DigitaBCMGpio;
 import kali.thé.modele.The;
 
 /**
@@ -53,10 +55,13 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     int temperatureGET = 0;
     
     javax.swing.Timer timer;
+    //led
+    DigitaBCMGpio digitaBCMGpio;
     
     public Preparation(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
+        digitaBCMGpio = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
         this.init();
     }
     
@@ -179,6 +184,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 init();
                 owner.retour.setEnabled(false);
                 preparer.setEnabled(false);
+                digitaBCMGpio.start();
             }
             else if ((cpt*100/(int)(temps*60) == 100)){
                 timer.stop();
@@ -186,6 +192,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 percentageComplete = 0;
                 owner.retour.setEnabled(true);
                 preparer.setEnabled(true);
+                digitaBCMGpio.stop();
             }
         }
     }
