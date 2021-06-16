@@ -33,14 +33,19 @@ public class Accueil extends JPanel implements ActionListener{
     JButton theManuel;
     JLabel logo;
     
-    
+    /**
+     * 
+     * @param Menu, the menu you want to put as the default one 
+     */
     public Accueil(Menu o){
         this.owner = o;   
         this.setBackground(Color.white);
         owner.title.setVisible(false);
         this.init();
     }
-    
+    /**
+     * just a function to initialize de menu. Organize de different items.
+     */
     private void init(){
         Color vert = new Color(0x00b300);
         //inits
@@ -93,6 +98,10 @@ public class Accueil extends JPanel implements ActionListener{
         this.add(theManuel, cont);   
     }
 
+    /**
+     * this is the function where the differents action are managed.
+     * @param e is the event that occured.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == catalogue){
@@ -110,6 +119,10 @@ public class Accueil extends JPanel implements ActionListener{
         
     }
     
+    /**
+     * Where you get the size of our screen
+     * @return Dimension the dimension of the rpi screen.
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());

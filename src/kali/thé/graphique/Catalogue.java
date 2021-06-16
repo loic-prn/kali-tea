@@ -32,7 +32,11 @@ public class Catalogue extends JPanel implements ActionListener{
     public boolean popup;
     
     
-    
+    /**
+     * Catalogue constructor
+     * @param o the parent menu.
+     * @param pop if the popup need to appear.
+     */
     public Catalogue(Menu o, boolean pop) {
         popup = pop;
         this.owner = o;
@@ -48,7 +52,9 @@ public class Catalogue extends JPanel implements ActionListener{
         
         this.init();
     }
-    
+    /**
+     * This function is called in the constructor to make it easier to understand.
+     */
     private void init(){
         owner.setTitle("Catalogue");
         owner.retour.setEnabled(true);
@@ -86,6 +92,10 @@ public class Catalogue extends JPanel implements ActionListener{
         this.add(scrollPane, cont);
     }
 
+    /**
+     * The function that handle the possible action performed.
+     * @param e the event that occured.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         for(int i = 0; i < tabThe.size() ; i++){
@@ -95,6 +105,10 @@ public class Catalogue extends JPanel implements ActionListener{
         }
     }
     
+    /**
+     * 
+     * @return Dimension the windom dimension.
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());

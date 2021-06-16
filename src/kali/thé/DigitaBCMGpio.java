@@ -32,6 +32,11 @@ public class DigitaBCMGpio implements Execute{
     final private GpioPinDigitalOutput pin;
     final private GpioController gpio;
     
+    /**
+     * Initialize the LED you want to manage.
+     * @param pinNumber the LED pin where the LED is.
+     * 
+     */
     public DigitaBCMGpio(Pin pinNumber) throws UnsupportedOperationException{
         // in order to use the Broadcom GPIO pin numbering scheme, we need to configure the
         // GPIO factory to use a custom configured Raspberry Pi GPIO provider
@@ -48,6 +53,9 @@ public class DigitaBCMGpio implements Execute{
 
     }
 
+    /**
+     * Switch on the LED.
+     */
     @Override
     public void start()  {
         System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
@@ -63,6 +71,9 @@ public class DigitaBCMGpio implements Execute{
             System.out.println("PITIE");
         }
     }
+    /**
+     * switch of the LED.
+     */
         public void stop()  {
         System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
 

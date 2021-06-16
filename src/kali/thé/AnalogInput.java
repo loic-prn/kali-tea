@@ -56,8 +56,13 @@ public class AnalogInput implements Execute{
     private static int numCanal = 0;  // A0 connector
 
     I2CDevice device;
-
-
+    
+    /**
+     * The constructor to handle an analog input device.
+     * @param numCanal the canal where the input is connected.
+     * @throws IOException to handle the possible exceptions.
+     * @throws com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException because we may throw exceptions linked to this lib.
+     */
     public AnalogInput(int numCanal) throws IOException, UnsupportedBusNumberException{
          this.numCanal=numCanal;       
         // fetchAllAvailableBusses(console);
@@ -71,6 +76,9 @@ public class AnalogInput implements Execute{
     }
 
 
+    /**
+     * The function that start the analog.
+     */
     @Override
     public void start() {
         // create Pi4J console wrapper/helper

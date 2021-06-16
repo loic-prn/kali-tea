@@ -32,13 +32,19 @@ public class Param extends JPanel{
     JButton language;
     
     
-    
+    /**
+     * The settings page constructor
+     * @param o the parent menu.
+     */
     public Param(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
         this.init();
     }
     
+    /**
+     * This function just make the constructor reading simpler.
+     */
     private void init(){
         owner.setTitle("Paramètres");
         owner.retour.setEnabled(true);
@@ -97,6 +103,10 @@ public class Param extends JPanel{
          
     }
     
+    /**
+     * 
+     * @return Dimension the current window dimension. 
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());

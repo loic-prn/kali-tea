@@ -19,6 +19,11 @@ public class TheProgramme {
     Date pretPour;
     boolean[] recurrence;
 
+    /**
+     * 
+     * @param pretPour, for when you want the tea.
+     * @param recurrence Which days do you want it.
+     */
     public TheProgramme(Date pretPour, boolean[] recurrence) {
         this.pretPour = pretPour;
         recurrence = new boolean[recurrence.length];

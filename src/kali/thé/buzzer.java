@@ -27,12 +27,17 @@ import java.util.logging.Logger;
  * @author Robert Savage
  * adapted by Lionel Buathier
  */
-public class LED implements Execute{
+public class buzzer implements Execute{
     
     final private GpioPinDigitalOutput pin;
     final private GpioController gpio;
     
-    public LED(Pin pinNumber) throws UnsupportedOperationException{
+    /**
+     * This is the buzzer constructor, in our case, the code is the same for the LED.
+     * @param pinNumber if you want to turn on the buzzer, use RaspiBcmPin.GPIO_16
+     * 
+     */
+    public buzzer(Pin pinNumber) throws UnsupportedOperationException{
         // in order to use the Broadcom GPIO pin numbering scheme, we need to configure the
         // GPIO factory to use a custom configured Raspberry Pi GPIO provider
         GpioFactory.setDefaultProvider(new RaspiGpioProvider(RaspiPinNumberingScheme.BROADCOM_PIN_NUMBERING));
@@ -48,21 +53,25 @@ public class LED implements Execute{
 
     }
 
+    /**
+     * The start function turn on the buzzer.
+     */
     @Override
     public void start()  {
-        System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
+        //System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
 
-        System.out.println("--> GPIO state should be: ON");
+        //System.out.println("--> GPIO state should be: ON");
 
         try {
             pin.high();
             Thread.sleep(100);
         
         }catch (InterruptedException ex) {
-            Logger.getLogger(LED.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("PITIE");
         }
     }
+    
         public void stop()  {
         System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
 
@@ -73,7 +82,7 @@ public class LED implements Execute{
             Thread.sleep(100);
         
         }catch (InterruptedException ex) {
-            Logger.getLogger(LED.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("PITIE");
         }
     }
@@ -87,4 +96,3 @@ public class LED implements Execute{
         //digitaBCMGpio.start();
     }
 }
-

@@ -52,7 +52,10 @@ public class Programmation extends JPanel implements ActionListener{
     boolean[] joursDeLaSemaineVerif = {false,false,false,false,false,false,false};
     String chaineAffiche;
     Color vert = new Color(0x00b300);
-    
+    /**
+     * Progrmmation constructor
+     * @param o the parent Menu.
+     */
     public Programmation(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
@@ -60,7 +63,9 @@ public class Programmation extends JPanel implements ActionListener{
         theChoisit = new JLabel("");
         this.init();
     }
-    
+    /**
+     * This function is just to make the constructor easier to read.
+     */
     private void init(){
         this.removeAll();
         owner.setPano(this);
@@ -148,7 +153,9 @@ public class Programmation extends JPanel implements ActionListener{
         }
         chaineUpdate();
     }
-    
+    /**
+     * Update the hour.
+     */
     public void chaineUpdate(){
         chaineAffiche = Integer.toString(actualHour) + "h" + Integer.toString(actualMin) + " ";
         heures.setSelectedItem(actualHour);
@@ -162,6 +169,10 @@ public class Programmation extends JPanel implements ActionListener{
         horaire.setText(chaineAffiche);
     }
 
+    /**
+     * handle the event that may occure.
+     * @param e the event that occured.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         The temp = null;
@@ -192,7 +203,10 @@ public class Programmation extends JPanel implements ActionListener{
         
         
     }
-    
+    /**
+     * 
+     * @return Dimension, the window dimension.
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());

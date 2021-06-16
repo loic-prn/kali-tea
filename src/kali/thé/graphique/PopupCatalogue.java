@@ -21,6 +21,11 @@ public class PopupCatalogue extends JDialog implements ActionListener{
     Catalogue j;
     The ret;
     
+    /**
+     * The pop up from Catalogue constructor
+     * @param j the catalogue
+     * @param owner the JFrame that own the pop-up
+     */
     public PopupCatalogue(Catalogue j, JFrame owner){
         
         super(owner,true);
@@ -32,11 +37,18 @@ public class PopupCatalogue extends JDialog implements ActionListener{
         }
     }
     
+    /**
+     * Set visible the dialogue pop-up
+     * @return The the the you selected.
+     */
     public The showDialog(){
         this.setVisible(true);
         return ret;
     }
-    
+    /**
+     * Handle the action that may occures.
+     * @param e the action performed. 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i=0; i<j.tabTheButton.length; i++){

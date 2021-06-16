@@ -26,7 +26,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import kali.thé.DigitaBCMGpio;
-import kali.thé.LED;
+import kali.thé.DigitaBCMGpio;
+import kali.thé.buzzer;
 import kali.thé.modele.*;
 
 /**
@@ -48,6 +49,7 @@ public class Menu extends JFrame implements ActionListener{
     JLabel title;
     
     DigitaBCMGpio led;
+    buzzer b;
     
     /**
      * 
@@ -56,6 +58,8 @@ public class Menu extends JFrame implements ActionListener{
      */
     public Menu(int longueur, int largeur) {
         led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        b = new buzzer(RaspiBcmPin.GPIO_18);
+        b.stop();
         led.stop();
         
         this.longueur = longueur;
@@ -73,7 +77,9 @@ public class Menu extends JFrame implements ActionListener{
         title = new JLabel("   Kali-Thé");
         this.setPano(new Accueil(this));
     }
-    
+    /**
+     * This function just maintain the date up to date (LOL).
+     */
     class ClockListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             SimpleDateFormat df = new SimpleDateFormat("HH:mm");
@@ -82,6 +88,10 @@ public class Menu extends JFrame implements ActionListener{
         }
     }
     
+    /**
+     * The functino put the date onto the JPanel
+     * @param j the JPanel you want to use.
+     */
     public void setPano(JPanel j){
         pano = j;
         SimpleDateFormat s = new SimpleDateFormat("HH:mm");
@@ -89,6 +99,10 @@ public class Menu extends JFrame implements ActionListener{
         initPan(s.format(date));
     }
     
+    /**
+     * Create the menu.
+     * @param heure the time you want to display.
+     */
     private void initMenu(String heure){
         ImageIcon retourIcon = new ImageIcon(getClass().getResource("/icones/return.png"));
         menu = new JPanel();
@@ -116,6 +130,10 @@ public class Menu extends JFrame implements ActionListener{
         menu.add(title,cont);
     }
     
+    /**
+     * This initialize the JPanel, calling initMenu/
+     * @param heure the current time that will be displayed on the screen.
+     */
     private void initPan(String heure){
         initMenu(heure);
         JPanel panTemp = new JPanel();
@@ -131,6 +149,10 @@ public class Menu extends JFrame implements ActionListener{
         this.pack();
     }
     
+    /**
+     * This repaint the manu with the hour up to date. 
+     * @param heure the current time to repaint.
+     */
     public void repaintMenu(String heure){
         this.remove(menu);
         initMenu(heure);
@@ -196,6 +218,10 @@ public class Menu extends JFrame implements ActionListener{
 //        return new Dimension(longueur,largeur);
 //    }
 
+    /**
+     * Handle the differents action that may be performed.
+     * @param e the event that happened. 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == retour){

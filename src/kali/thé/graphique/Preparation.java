@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -27,7 +29,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import kali.thé.DigitaBCMGpio;
-import kali.thé.LED;
+import kali.thé.DigitaBCMGpio;
 import kali.thé.modele.The;
 
 /**
@@ -58,15 +60,21 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     javax.swing.Timer timer;
     //led
     
-    
+    /**
+     * This is the function to initialize de preparation page.
+     * @param o the page that is displayed. 
+     */
     public Preparation(Menu o) {
         this.owner = o;
         this.setBackground(Color.white);
-        
+        owner.b.stop();
         owner.led.stop();
         this.init();
     }
     
+    /**
+     * The function organize the different items.
+     */
     private void init(){
         this.removeAll();
         
@@ -178,6 +186,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             
     }
 
+    /**
+     * This function will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time.
+     */
     class ClockListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if((cpt*100/(int)(temps*60) < 100)){
@@ -195,10 +206,20 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 owner.retour.setEnabled(true);
                 preparer.setEnabled(true);
                 owner.led.stop();
+                owner.b.start();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                owner.b.stop();
             }
         }
     }
-    
+    /** 
+     * here are handled the differents action performed on this page.
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         
@@ -221,11 +242,19 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         }
     }
     
+     /**
+     * Where you get the size of our screen
+     * @return Dimension the dimension of the rpi screen.
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());
     }
 
+    /**
+     * It manages the JSpinner and get the value selected.
+     * @param e is the event we aim to manage.
+     */
     @Override
     public void stateChanged(ChangeEvent e) {
         if(e.getSource() == minutes){

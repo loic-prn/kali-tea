@@ -37,13 +37,20 @@ public class Infusion extends JPanel implements ActionListener{
     JProgressBar progressTime;
     JScrollPane scrollPane;
     
-    
+    /**
+     * Infusion constructor.
+     * @param o the parent menu.
+     * @param t the the.
+     */
     public Infusion(Menu o, The t) {
         this.owner = o;
         this.t = t;
         this.setBackground(Color.white);
         init();
     }
+    /**
+     * This function just help the constructor to be simpler to read.
+     */
     private void init(){
         
         //inits
@@ -90,12 +97,20 @@ public class Infusion extends JPanel implements ActionListener{
         this.add(tempsRestant, cont);
     }
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         
            
     }
     
+    /**
+     * 
+     * @return Dimension the dimension of the current window. 
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());
