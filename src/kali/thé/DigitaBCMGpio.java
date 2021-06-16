@@ -55,13 +55,22 @@ public class DigitaBCMGpio implements Execute{
         System.out.println("--> GPIO state should be: ON");
 
         try {
-            Thread.sleep(1000);
             pin.high();
-            Thread.sleep(10000);
+            Thread.sleep(100);
+        
+        }catch (InterruptedException ex) {
+            Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("PITIE");
+        }
+    }
+        public void stop()  {
+        System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
+
+        System.out.println("--> GPIO state should be: ON");
+
+        try {
             pin.low();
-            Thread.sleep(1000);
-            pin.toggle();
-            Thread.sleep(1000);
+            Thread.sleep(100);
         
         }catch (InterruptedException ex) {
             Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);

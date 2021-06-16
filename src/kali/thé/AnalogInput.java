@@ -70,8 +70,8 @@ public class AnalogInput implements Execute{
 
         // allow for user to exit program using CTRL-C
         console.promptForExit();
-        
-        for (int i = 0; i < 50; i++) {
+        byte i = 1;
+        for (;;) {
 
             // now we will perform our first I2C READ operation to retrieve raw integration
             // results from DATA_0 and DATA_1 registers
@@ -92,6 +92,8 @@ public class AnalogInput implements Execute{
         console.println("AnalogInput input A" + numCanal +" = " +  dataRead);
  */
             int dataRead;
+            int previous = 0;
+            boolean pre = true;
             byte buffer[] = new byte[2];
             int BytesReceveived = 0;
             try {
@@ -100,13 +102,31 @@ public class AnalogInput implements Execute{
                 Logger.getLogger(AnalogInput.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (BytesReceveived == 2) {
+                
                 // console.println("bytes received : = " +  BytesReceveived);
-                dataRead = buffer[1] * 256 + buffer[0];
+                //dataRead = buffer[1] * 256 + buffer[0];
+                /*if(buffer[0] < 0){
+                    ++i;
+                }*/
+                dataRead = buffer[1] * 256 + 128 * i + buffer[0];
+                if(pre){
+                    previous = dataRead;
+                    pre = false;
+                }
+                if((dataRead - previous) < 0){
+                    --i;
+                }
+                else if((previous - dataRead) > 30){
+                    ++i;
+                }
+                //console.println("dataRead: " + dataRead);
+                dataRead = buffer[1] * 256 * i + buffer[0];
                 if (dataRead < 4096 && dataRead > 0) {
                     console.println("Analog A0 (%) = " + dataRead);
                     //console.println("AnalogInput A0 (decimal) = " + dataRead);
                     //console.println("AnalogInput A0 (hexa) = " + String.format("0x%02x", dataRead));
                  }
+                previous = dataRead;
             }
         }
     }
