@@ -21,18 +21,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.PopupFactory;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import kali.thé.modele.The;
 
 /**
  *
  * @author p2008444
  */
-public class Programmation extends JPanel implements ActionListener{
+public class Programmation extends JPanel implements ActionListener,ChangeListener{
     
     Menu owner;
     
     JLabel heure;
-    JLabel heureChoisie;
+    JLabel horaire;
+    
     JButton selection;
     JCheckBox[] listeCheckBox;
     JLabel[] joursSemaine;
@@ -43,6 +46,11 @@ public class Programmation extends JPanel implements ActionListener{
     Integer[] h;
     Integer[] m;
     String[] joursDeLaSemaine = { "Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche" };
+    
+    int actualHour;
+    int actualMin;
+    boolean[] joursDeLaSemaineVerif = {false,false,false,false,false,false,false};
+    String chaineAffiche;
     
     
     public Programmation(Menu o) {
@@ -59,9 +67,8 @@ public class Programmation extends JPanel implements ActionListener{
         m = new Integer[61];
         h = new Integer[25];
         heure = new JLabel("Pour quelle heure:");
-        heureChoisie = new JLabel("Programmé pour: ");
-        heures = new JComboBox(h);
-        minutes = new JComboBox(m);
+        horaire = new JLabel("Programmé pour: ");
+        
         selection = new JButton("Selectionner un thé");
         selection.addActionListener(this);
         listeCheckBox = new JCheckBox[7];
@@ -73,6 +80,11 @@ public class Programmation extends JPanel implements ActionListener{
         for(int i = 0; i < 25; i++){
             h[i] = i;
         }
+        
+        heures = new JComboBox(h);
+        heures.addActionListener(this);
+        minutes = new JComboBox(m);
+        minutes.addActionListener(this);
         
         for (int i=0; i<7; i++){
             listeCheckBox[i] = new JCheckBox(joursDeLaSemaine[i]);
@@ -109,7 +121,7 @@ public class Programmation extends JPanel implements ActionListener{
         cont.insets = new Insets(20,0,20,0);
         cont.gridx = 0;
         cont.gridy = 2;
-        this.add(heureChoisie,cont);
+        this.add(horaire,cont);
         
         cont.fill = GridBagConstraints.BOTH;
         cont.gridwidth = 2;
@@ -125,8 +137,22 @@ public class Programmation extends JPanel implements ActionListener{
             cont.gridx = 0;
             cont.gridy = 6+i;
             this.add(listeCheckBox[i], cont);
+            listeCheckBox[i].addChangeListener(this);
+            listeCheckBox[i].addActionListener(this);
+            
         }
           
+    }
+    
+    public void chaineUpdate(){
+        chaineAffiche = heures.getSelectedItem() + "h" + minutes.getSelectedItem() + " ";
+        for(int i = 0; i < 7; i++){
+            if(joursDeLaSemaineVerif[i]){
+                chaineAffiche = chaineAffiche + joursDeLaSemaine[i] + " ";
+            }
+        }
+        
+        horaire.setText(chaineAffiche);
     }
 
     @Override
@@ -140,12 +166,30 @@ public class Programmation extends JPanel implements ActionListener{
                 this.init();
             }
         }
+        else if (e.getSource() == heures ||e.getSource() == minutes){
+            chaineUpdate();
+        }
+        
+        for(int i =0; i < 7; i++){
+            if(e.getSource() == listeCheckBox[i]){
+                joursDeLaSemaineVerif[i] = !joursDeLaSemaineVerif[i];
+                System.out.println(joursDeLaSemaine[i] + " " + joursDeLaSemaineVerif[i]);
+                chaineUpdate();
+                
+            }
+        }
+        
         
     }
     
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        
     }
     
 }
