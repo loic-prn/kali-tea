@@ -2,6 +2,17 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+                dataRead = (buffer[1] * 256) + (128 * i) + buffer[0];
+                //console.println("dataRead: " + dataRead);
+                if(prev > 0 && dataRead < 0){
+                    i++;
+                }
+                dataRead = (buffer[1] * 256) + (256 * i) + buffer[0];
+ */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package kali.thé;
 
@@ -21,6 +32,7 @@ import com.pi4j.io.i2c.I2CFactory;
 import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 import com.pi4j.platform.PlatformAlreadyAssignedException;
 import com.pi4j.util.Console;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kali.thé.Execute;
@@ -42,10 +54,10 @@ public class AnalogInput implements Execute{
     private static final byte BASE_HAT_REG_RAW_DATA = (byte) 0x10;
     private static final byte BASE_HAT_REG_INPUT_VOLTAGE = (byte) 0x20;
     private static int numCanal = 0;  // A0 connector
-    
+
     I2CDevice device;
 
-    
+
     public AnalogInput(int numCanal) throws IOException, UnsupportedBusNumberException{
          this.numCanal=numCanal;       
         // fetchAllAvailableBusses(console);
@@ -58,7 +70,7 @@ public class AnalogInput implements Execute{
 
     }
 
-    
+
     @Override
     public void start() {
         // create Pi4J console wrapper/helper
@@ -70,7 +82,10 @@ public class AnalogInput implements Execute{
 
         // allow for user to exit program using CTRL-C
         console.promptForExit();
-        byte i = 1;
+        ArrayList<Integer> list;
+        list = new ArrayList<>();
+        int i = 0;
+        int j = 0;
         for (;;) {
 
             // now we will perform our first I2C READ operation to retrieve raw integration
@@ -91,9 +106,8 @@ public class AnalogInput implements Execute{
         int dataRead= device.read(BASE_HAT_REG_RAW_DATA+numCanal);
         console.println("AnalogInput input A" + numCanal +" = " +  dataRead);
  */
+            int prev = 1;
             int dataRead;
-            int previous = 0;
-            boolean pre = true;
             byte buffer[] = new byte[2];
             int BytesReceveived = 0;
             try {
@@ -102,31 +116,20 @@ public class AnalogInput implements Execute{
                 Logger.getLogger(AnalogInput.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (BytesReceveived == 2) {
-                
-                // console.println("bytes received : = " +  BytesReceveived);
-                //dataRead = buffer[1] * 256 + buffer[0];
-                /*if(buffer[0] < 0){
-                    ++i;
-                }*/
-                dataRead = buffer[1] * 256 + 128 * i + buffer[0];
-                if(pre){
-                    previous = dataRead;
-                    pre = false;
-                }
-                if((dataRead - previous) < 0){
-                    --i;
-                }
-                else if((previous - dataRead) > 30){
-                    ++i;
-                }
+                dataRead = (buffer[1] * 256) + (128 * j) + buffer[0];
                 //console.println("dataRead: " + dataRead);
-                dataRead = buffer[1] * 256 * i + buffer[0];
+                list.add(dataRead);
+                if(i >= 2){
+                    if((list.get(i) - list.get(i-1)) < -120){
+                        j++;
+                    }
+                }
                 if (dataRead < 4096 && dataRead > 0) {
-                    console.println("Analog A0 (%) = " + dataRead);
+                    console.println("Analog A0 = " + (double)dataRead/17.0);
                     //console.println("AnalogInput A0 (decimal) = " + dataRead);
                     //console.println("AnalogInput A0 (hexa) = " + String.format("0x%02x", dataRead));
                  }
-                previous = dataRead;
+                i++;
             }
         }
     }
@@ -154,5 +157,5 @@ public class AnalogInput implements Execute{
             }
         }
     }
-    
+
 }
