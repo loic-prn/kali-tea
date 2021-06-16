@@ -29,7 +29,7 @@ import kali.thé.modele.The;
  *
  * @author p2008444
  */
-public class Programmation extends JPanel implements ActionListener,ChangeListener{
+public class Programmation extends JPanel implements ActionListener{
     
     Menu owner;
     
@@ -47,8 +47,8 @@ public class Programmation extends JPanel implements ActionListener,ChangeListen
     Integer[] m;
     String[] joursDeLaSemaine = { "Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche" };
     
-    int actualHour;
-    int actualMin;
+    int actualHour = 0;
+    int actualMin = 0;
     boolean[] joursDeLaSemaineVerif = {false,false,false,false,false,false,false};
     String chaineAffiche;
     
@@ -63,6 +63,7 @@ public class Programmation extends JPanel implements ActionListener,ChangeListen
     
     private void init(){
         this.removeAll();
+        owner.setPano(this);
         //inits
         m = new Integer[61];
         h = new Integer[25];
@@ -73,11 +74,13 @@ public class Programmation extends JPanel implements ActionListener,ChangeListen
         selection.addActionListener(this);
         listeCheckBox = new JCheckBox[7];
         
-        for(int i = 0; i < 61; i ++){
+        
+        
+        for(int i = 0; i < 60; i ++){
             m[i] = i;
         }
         
-        for(int i = 0; i < 25; i++){
+        for(int i = 0; i < 24; i++){
             h[i] = i;
         }
         
@@ -137,21 +140,22 @@ public class Programmation extends JPanel implements ActionListener,ChangeListen
             cont.gridx = 0;
             cont.gridy = 6+i;
             this.add(listeCheckBox[i], cont);
-            listeCheckBox[i].addChangeListener(this);
             listeCheckBox[i].addActionListener(this);
             
         }
-          
+        chaineUpdate();
     }
     
     public void chaineUpdate(){
-        chaineAffiche = heures.getSelectedItem() + "h" + minutes.getSelectedItem() + " ";
+        chaineAffiche = Integer.toString(actualHour) + "h" + Integer.toString(actualMin) + " ";
+        heures.setSelectedItem(actualHour);
+        minutes.setSelectedItem(actualMin);
         for(int i = 0; i < 7; i++){
             if(joursDeLaSemaineVerif[i]){
-                chaineAffiche = chaineAffiche + joursDeLaSemaine[i] + " ";
+                //chaineAffiche = chaineAffiche + joursDeLaSemaine[i] + " ";
+                listeCheckBox[i].setSelected(true);
             }
         }
-        
         horaire.setText(chaineAffiche);
     }
 
@@ -166,16 +170,20 @@ public class Programmation extends JPanel implements ActionListener,ChangeListen
                 this.init();
             }
         }
-        else if (e.getSource() == heures ||e.getSource() == minutes){
+        else if (e.getSource() == heures){
+            actualHour = (Integer)heures.getSelectedItem();
+            chaineUpdate();
+        }
+        
+        else if (e.getSource() == minutes){
+            actualMin = (Integer)minutes.getSelectedItem();
             chaineUpdate();
         }
         
         for(int i =0; i < 7; i++){
             if(e.getSource() == listeCheckBox[i]){
                 joursDeLaSemaineVerif[i] = !joursDeLaSemaineVerif[i];
-                System.out.println(joursDeLaSemaine[i] + " " + joursDeLaSemaineVerif[i]);
                 chaineUpdate();
-                
             }
         }
         
@@ -185,11 +193,6 @@ public class Programmation extends JPanel implements ActionListener,ChangeListen
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());
-    }
-
-    @Override
-    public void stateChanged(ChangeEvent e) {
-        
     }
     
 }

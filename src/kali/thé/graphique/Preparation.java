@@ -62,6 +62,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         this.owner = o;
         this.setBackground(Color.white);
         digitaBCMGpio = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        digitaBCMGpio.stop();
         this.init();
     }
     
