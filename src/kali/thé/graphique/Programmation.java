@@ -51,7 +51,7 @@ public class Programmation extends JPanel implements ActionListener{
     int actualMin = 0;
     boolean[] joursDeLaSemaineVerif = {false,false,false,false,false,false,false};
     String chaineAffiche;
-    
+    Color vert = new Color(0x00b300);
     
     public Programmation(Menu o) {
         this.owner = o;
@@ -71,6 +71,8 @@ public class Programmation extends JPanel implements ActionListener{
         horaire = new JLabel("Programmé pour: ");
         
         selection = new JButton("Selectionner un thé");
+        selection.setBackground(vert);
+        selection.setForeground(Color.white);
         selection.addActionListener(this);
         listeCheckBox = new JCheckBox[7];
         
