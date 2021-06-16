@@ -26,8 +26,8 @@ public class KaliThé {
         // truc
         Menu me = new Menu(790,430);
         me.setVisible(true);
-        AnalogInput anal = new AnalogInput(0);
-        anal.start();
+        //AnalogInput anal = new AnalogInput(0);
+        //anal.start();
     }
     
 }
