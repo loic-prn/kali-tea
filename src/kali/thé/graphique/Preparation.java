@@ -6,6 +6,7 @@
 package kali.thé.graphique;
 
 import com.pi4j.io.gpio.RaspiBcmPin;
+import com.pi4j.io.i2c.I2CFactory;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -13,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import kali.thé.AnalogInput;
 import kali.thé.DigitaBCMGpio;
 import kali.thé.DigitaBCMGpio;
 import kali.thé.modele.The;
@@ -49,6 +52,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     JProgressBar progressPrep;
     JLabel tempsRestant;
     JLabel printHour;
+    JLabel prechauffeTxt;
     
     int percentageComplete = 0;
     int cpt = 0;
@@ -56,6 +60,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     int tempssec = 0;
     double temps = 0.0;
     int temperatureGET = 0;
+    The theManuel;
     
     javax.swing.Timer timer;
     //led
@@ -112,6 +117,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         progressPrep.setForeground(Color.red);
         printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
+        
+        prechauffeTxt = new JLabel("");
+        prechauffeTxt.setForeground(Color.red);
         
         cont.fill = GridBagConstraints.CENTER;
         cont.gridx = 0;
@@ -173,15 +181,20 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         this.add(preparer,cont);
         
         
+        cont.fill = GridBagConstraints.CENTER;
+        cont.gridwidth = 0;
+        cont.insets = new Insets(5,0,5,0);
+        cont.gridy = 7;
+        this.add(prechauffeTxt,cont);
         
         cont.fill = GridBagConstraints.CENTER;
         cont.gridwidth = 0;
         cont.insets = new Insets(0,0,5,0);
-        cont.gridy = 7;
+        cont.gridy = 8;
         this.add(progressPrep,cont);
         
         cont.fill = GridBagConstraints.CENTER;
-        cont.gridy = 8;
+        cont.gridy = 9;
         this.add(tempsRestant,cont);
             
     }
@@ -189,12 +202,12 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     /**
      * This function will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time.
      */
-    class ClockListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if((cpt*100/(int)(temps*60) < 100)){
+    class ClockListener implements ActionListener { //Chaque seconde, le code ci-dessous est réalisé, (après avoir qclickuer sur préparer)
+        public void actionPerformed(ActionEvent e) { 
+            if((cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
                 cpt++;
-                percentageComplete = (cpt*100/(int)(temps*60));
-                init();
+                percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
+                init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
                 owner.retour.setEnabled(false);
                 preparer.setEnabled(false);
                 owner.led.start();
@@ -230,17 +243,46 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             temps = tempsmin + Double.valueOf(tempssec)/60;
             
             System.out.println(temps);
-            The theManuel = new The(temps,"",slider1.getValue(),"");
+            theManuel = new The(temps,"",slider1.getValue(),"");
             
             System.out.println("\n");
             System.out.println("Thé crée : \n" + "temps : " + temps + "\n" + "temperature : " + slider1.getValue());
             
-            //timer pour heure
+            
+            
+            prechauffeTxt.setText("En préchauffe");
+            prechauffe();
+            prechauffeTxt.setText("En préparaton");
+            
+
+            
             timer = new javax.swing.Timer(1000, new Preparation.ClockListener());
             timer.start();
             
         }
     }
+    
+    private void prechauffe(){
+        
+        int temperature = theManuel.getTemperature();
+        owner.retour.setEnabled(false);
+        preparer.setEnabled(false);
+        AnalogInput termometre;
+
+
+        try {
+            termometre= new AnalogInput(0);
+            termometre.start();
+            while(temperature > termometre.getDonnees()){
+                termometre.start();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (I2CFactory.UnsupportedBusNumberException ex) {
+            Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
      /**
      * Where you get the size of our screen
