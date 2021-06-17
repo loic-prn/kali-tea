@@ -45,7 +45,7 @@ public class Catalogue extends JPanel implements ActionListener{
         
         for (int i = 0; i < 100; i++){
             
-            tabThe.add(new The(10, "The " + i, 50, "Desc" + i));
+            tabThe.add(new The(Math.random(), "The " + i, 50, "Desc" + i));
         }
         
         tabTheButton = new JButton[tabThe.size()];
@@ -74,6 +74,7 @@ public class Catalogue extends JPanel implements ActionListener{
             tabTheButton[i] = new JButton(tabThe.get(i).getNom());
             tabTheButton[i].addActionListener(this);
             tabTheButton[i].setPreferredSize(new Dimension(282,30));
+            tabTheButton[i].setBackground(Color.white);
             cont2.gridy = i;
             pane.add(tabTheButton[i], cont2); 
         }

@@ -12,6 +12,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -24,6 +25,7 @@ import javax.swing.PopupFactory;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import kali.thé.modele.The;
+import kali.thé.modele.TheProgramme;
 
 /**
  *
@@ -42,6 +44,7 @@ public class Programmation extends JPanel implements ActionListener{
     JLabel theChoisit;
     JComboBox heures;
     JComboBox minutes;
+    JButton valider;
     
     Integer[] h;
     Integer[] m;
@@ -52,6 +55,10 @@ public class Programmation extends JPanel implements ActionListener{
     boolean[] joursDeLaSemaineVerif = {false,false,false,false,false,false,false};
     String chaineAffiche;
     Color vert = new Color(0x00b300);
+    
+    TheProgramme tp;
+    The t;
+    
     /**
      * Progrmmation constructor
      * @param o the parent Menu.
@@ -80,8 +87,9 @@ public class Programmation extends JPanel implements ActionListener{
         selection.setForeground(Color.white);
         selection.addActionListener(this);
         listeCheckBox = new JCheckBox[7];
-        
-        
+        valider = new JButton("Valider");
+        valider.addActionListener(this);
+        valider.setBackground(Color.white);
         
         for(int i = 0; i < 60; i ++){
             m[i] = i;
@@ -144,13 +152,18 @@ public class Programmation extends JPanel implements ActionListener{
         cont.gridy = 4;
         this.add(theChoisit, cont);
         cont.insets = new Insets(0,0,0,0);
-        for (int i=0; i<7; i++){
+        int i;
+        for (i=0; i<7; i++){
             cont.gridx = 0;
             cont.gridy = 6+i;
             this.add(listeCheckBox[i], cont);
             listeCheckBox[i].addActionListener(this);
             
         }
+        cont.insets = new Insets(15,0,0,0);
+        cont.gridx = 0;
+        cont.gridy = i+7;
+        this.add(valider,cont);
         chaineUpdate();
     }
     /**
@@ -181,6 +194,7 @@ public class Programmation extends JPanel implements ActionListener{
             temp = fen.showDialog();
             if (temp != null){
                 theChoisit.setText(temp.getNom());
+                t = temp;
                 this.init();
             }
         }
@@ -192,6 +206,13 @@ public class Programmation extends JPanel implements ActionListener{
         else if (e.getSource() == minutes){
             actualMin = (Integer)minutes.getSelectedItem();
             chaineUpdate();
+        }
+        
+        else if (e.getSource() == valider){
+            tp = new TheProgramme(new Date(0, 0, 0, actualHour, actualMin, 0),joursDeLaSemaineVerif,t);
+            owner.proglist.add(tp);
+            System.out.println(tp);
+            owner.setPano(new Accueil(owner));
         }
         
         for(int i =0; i < 7; i++){
