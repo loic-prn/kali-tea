@@ -112,7 +112,11 @@ public class Menu extends JFrame implements ActionListener{
                 if (!proglist.isEmpty()){
                     for (int i=0; i<proglist.size(); i++){
                         if (proglist.get(i).getPretPour().getHours() == date.getHours() && proglist.get(i).getPretPour().getMinutes()== date.getMinutes()){
-                            if (proglist.get(i).isRecurrence(date.getDay())){
+                            int da = date.getDay() - 1;
+                            if (da == -1){
+                                da = 6;
+                            }
+                            if (proglist.get(i).isRecurrence(da)){
                                 Infusion temp = new Infusion(Menu.this,proglist.get(i));
                                 setPano(temp);
                                 temp.startThe();
