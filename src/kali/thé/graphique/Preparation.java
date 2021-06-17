@@ -9,6 +9,7 @@ import com.pi4j.io.gpio.RaspiBcmPin;
 import com.pi4j.io.i2c.I2CFactory;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -84,7 +85,8 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
      */
     private void init(){
         this.removeAll();
-        
+         Font police1 = new Font("Arial",Font.BOLD,15);
+        Color vert = new Color(0x00b300);
         owner.setTitle("Préparation");
         owner.retour.setEnabled(true);
         owner.title.setVisible(true);
@@ -93,6 +95,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         GridBagConstraints cont = new GridBagConstraints();
         
         temperaturePrepa = new JLabel("Temperature de prepartion");
+        temperaturePrepa.setFont(police1);
         
         slider1 = new JSlider();
         slider1.setPreferredSize(new Dimension(300,20));
@@ -103,20 +106,27 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         slider1.setValue(temperatureGET);
         
         tempsPrep = new JLabel("Temps de préparation");
+        tempsPrep.setFont(police1);
+        
         secondes = new JSpinner(new SpinnerNumberModel(0,0,60,1));
         secondes.setValue(tempssec);
         secondes.addChangeListener(this);
+        
         minutes = new JSpinner(new SpinnerNumberModel(0,0,60,1));
         minutes.setValue(tempsmin);
         minutes.addChangeListener(this);
+        
         preparer = new JButton("Préparer");
-        preparer.setBackground(Color.blue);
+        preparer.setBackground(vert);
         preparer.setForeground(Color.white);
         preparer.addActionListener(this);
+        preparer.setFont(police1);
+        
         progressPrep = new JProgressBar();
         progressPrep.setValue(percentageComplete);
         progressPrep.setPreferredSize(new Dimension(200,20));
         progressPrep.setForeground(Color.red);
+        
         printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
         
@@ -214,7 +224,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             }
             
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
+                
                 owner.led.stop();
+                prechauffeTxt.setText("Infusion");
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
                 init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
@@ -263,12 +275,10 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             
             
             
-            prechauffeTxt.setText("En préchauffe");
-            prechauffe();
-            prechauffeTxt.setText("En préparaton");
             
 
-            
+
+            prechauffeTxt.setText("En préchauffe");
             timer = new javax.swing.Timer(1000, new Preparation.ClockListener());
             timer.start();
             

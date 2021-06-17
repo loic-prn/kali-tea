@@ -7,8 +7,10 @@ package kali.thé.graphique;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -56,6 +58,8 @@ public class Catalogue extends JPanel implements ActionListener{
      * This function is called in the constructor to make it easier to understand.
      */
     private void init(){
+        Color vert = new Color(0x00b300);
+        Font police1 = new Font("Arial",Font.BOLD,15);
         owner.setTitle("Catalogue");
         owner.retour.setEnabled(true);
         owner.title.setVisible(true);
@@ -67,13 +71,16 @@ public class Catalogue extends JPanel implements ActionListener{
         GridBagConstraints cont2 = new GridBagConstraints();
         cont2.fill = GridBagConstraints.BOTH;
         cont2.gridx = 0;
-        
+        cont2.insets = new Insets(0,0,2,0);
         
         
         for(int i = 0; i < tabThe.size(); i++){
             tabTheButton[i] = new JButton(tabThe.get(i).getNom());
             tabTheButton[i].addActionListener(this);
             tabTheButton[i].setPreferredSize(new Dimension(282,30));
+            tabTheButton[i].setForeground(Color.white);
+            tabTheButton[i].setBackground(vert);
+            tabTheButton[i].setFont(police1);
             cont2.gridy = i;
             pane.add(tabTheButton[i], cont2); 
         }

@@ -7,6 +7,7 @@ package kali.thé.graphique;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -48,25 +49,36 @@ public class Accueil extends JPanel implements ActionListener{
      */
     private void init(){
         Color vert = new Color(0x00b300);
+        Font police1 = new Font("Arial",Font.BOLD,15);
         //inits
         logo = new JLabel();
         logo.setIcon(new ImageIcon(getClass().getResource("/icones/logoKali-Thé2.png")));
+        
         catalogue = new JButton("Catalogue de thés");
-        catalogue.setBackground(vert);
+        catalogue.setBackground(vert);        //inits
+
         catalogue.setForeground(Color.white);
         catalogue.addActionListener(this);
+        catalogue.setFont(police1);
+        
         infuProgrammé = new JButton("Infusion programmée");
         infuProgrammé.setBackground(vert);
         infuProgrammé.setForeground(Color.white);
         infuProgrammé.addActionListener(this);
+        infuProgrammé.setFont(police1);
+        
         Param = new JButton("Paramètres");
         Param.setBackground(vert);
         Param.setForeground(Color.white);
         Param.addActionListener(this);
+        Param.setFont(police1);
+        
         theManuel = new JButton(" Thé Manuel");
+        theManuel.setFont(police1);
         theManuel.setBackground(vert);
         theManuel.setForeground(Color.white);
         theManuel.addActionListener(this);
+        
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();

@@ -7,6 +7,7 @@ package kali.thé.graphique;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -27,7 +28,7 @@ import kali.thé.modele.The;
  * @author p2008444
  */
 public class Infusion extends JPanel implements ActionListener{
-    
+    Color vert = new Color(0x00b300);
     Menu owner;
     The t;
     
@@ -66,9 +67,13 @@ public class Infusion extends JPanel implements ActionListener{
      */
     private void init(){
         this.removeAll();
+        Font police1 = new Font("Arial",Font.BOLD,15);
         //inits
         titreThe = new JLabel(t.getNom());
+        titreThe.setFont(police1);
+        
         description = new JLabel(t.getDescription());
+        
         scrollPane = new JScrollPane(description);
         scrollPane.setPreferredSize(new Dimension(300,100));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -76,10 +81,15 @@ public class Infusion extends JPanel implements ActionListener{
         
                 
         infuser = new JButton("Infuser");
+        infuser.setBackground(vert);
+        infuser.setForeground(Color.white);
         infuser.addActionListener(this);
+        infuser.setFont(police1);
+        
         progressTime = new JProgressBar();
         progressTime.setValue(percentageComplete);
         progressTime.setForeground(Color.red);
+        
         tempsmin = (int)t.getTempsInfusion();
         double temp = t.getTempsInfusion() - tempsmin;
         tempssec = (int)(temp*60);

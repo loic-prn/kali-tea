@@ -7,6 +7,7 @@ package kali.thé.graphique;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -68,17 +69,23 @@ public class Programmation extends JPanel implements ActionListener{
      */
     private void init(){
         this.removeAll();
+         Font police1 = new Font("Arial",Font.BOLD,15);
         owner.setPano(this);
         //inits
         m = new Integer[61];
         h = new Integer[25];
         heure = new JLabel("Pour quelle heure:");
+        heure.setFont(police1);
+        
         horaire = new JLabel("Programmé pour: ");
+        horaire.setFont(police1);
         
         selection = new JButton("Selectionner un thé");
         selection.setBackground(vert);
         selection.setForeground(Color.white);
         selection.addActionListener(this);
+        selection.setFont(police1);
+        
         listeCheckBox = new JCheckBox[7];
         
         

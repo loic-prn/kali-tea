@@ -7,9 +7,12 @@ package kali.thé.graphique;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +24,7 @@ import javax.swing.border.Border;
  *
  * @author p2008444
  */
-public class Param extends JPanel{
+public class Param extends JPanel implements ActionListener{
     
     Menu owner;
     
@@ -46,6 +49,7 @@ public class Param extends JPanel{
      * This function just make the constructor reading simpler.
      */
     private void init(){
+        Font police1 = new Font("Arial",Font.BOLD,15);
         owner.setTitle("Paramètres");
         owner.retour.setEnabled(true);
         owner.title.setVisible(true);
@@ -54,10 +58,25 @@ public class Param extends JPanel{
         GridBagConstraints cont = new GridBagConstraints();
         
         timeSwap = new JButton("      Changer l'heure");
+        timeSwap.addActionListener(this);
+        timeSwap.setFont(police1);
+        
         majThe = new JButton("      Mettre à jour les thés");
+        majThe.addActionListener(this);
+        majThe.setFont(police1);
+        
         majLog = new JButton("      Mettre à jour le logiciel");
+        majLog.addActionListener(this);
+        majLog.setFont(police1);
+        
         wifi = new JButton("      Connexion WiFi");
+        wifi.addActionListener(this);
+        wifi.setFont(police1);
+        
         language = new JButton("      Langue du système");
+        language.addActionListener(this);
+        language.setFont(police1);
+        
         ImageIcon horloge = new ImageIcon(getClass().getResource("/icones/clock2.png"));
         ImageIcon languageIcon = new ImageIcon(getClass().getResource("/icones/language.png"));
         ImageIcon updateThea = new ImageIcon(getClass().getResource("/icones/update.png"));
@@ -110,5 +129,25 @@ public class Param extends JPanel{
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(owner.getLongueur(),owner.getLargeur());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==timeSwap){
+            
+        }
+        else if(e.getSource()==majThe){
+            
+        }
+        else if(e.getSource() == majLog){
+            
+        }
+        
+        else if(e.getSource() == language){
+            
+        }
+        else if(e.getSource() == wifi){
+            
+        }
     }
 }
