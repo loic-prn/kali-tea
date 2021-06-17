@@ -6,6 +6,7 @@
 package kali.thé.graphique;
 
 import com.pi4j.io.gpio.RaspiBcmPin;
+import com.pi4j.io.i2c.I2CFactory;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,16 +16,20 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import kali.thé.AnalogInput;
 import kali.thé.DigitaBCMGpio;
 import kali.thé.DigitaBCMGpio;
 import kali.thé.buzzer;
@@ -49,6 +54,7 @@ public class Menu extends JFrame implements ActionListener{
     JLabel title;
     
     DigitaBCMGpio led;
+    AnalogInput termometre;
     buzzer b;
     
     /**
@@ -58,6 +64,14 @@ public class Menu extends JFrame implements ActionListener{
      */
     public Menu(int longueur, int largeur) {
         led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        try {
+            termometre = new AnalogInput(0);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (I2CFactory.UnsupportedBusNumberException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         b = new buzzer(RaspiBcmPin.GPIO_18);
         b.stop();
         led.stop();

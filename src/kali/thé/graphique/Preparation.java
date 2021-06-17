@@ -62,6 +62,8 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     int temperatureGET = 0;
     The theManuel;
     
+    boolean preCho = true;
+    
     javax.swing.Timer timer;
     //led
     
@@ -203,22 +205,33 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
      * This function will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time.
      */
     class ClockListener implements ActionListener { //Chaque seconde, le code ci-dessous est réalisé, (après avoir qclickuer sur préparer)
+        
         public void actionPerformed(ActionEvent e) { 
-            if((cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
+            
+            if(preCho){
+                owner.led.start();
+                preCho = prechauffe();
+            }
+            
+            else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
+                owner.led.stop();
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
                 init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
                 owner.retour.setEnabled(false);
                 preparer.setEnabled(false);
-                owner.led.start();
+                
+                //INFUSION
+                
             }
+            
             else if ((cpt*100/(int)(temps*60) == 100)){
                 timer.stop();
                 cpt = 0;
                 percentageComplete = 0;
                 owner.retour.setEnabled(true);
                 preparer.setEnabled(true);
-                owner.led.stop();
+                
                 owner.b.start();
                 try {
                     Thread.sleep(1000);
@@ -262,25 +275,19 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         }
     }
     
-    private void prechauffe(){
+    private boolean prechauffe(){
         
-        int temperature = theManuel.getTemperature();
         owner.retour.setEnabled(false);
         preparer.setEnabled(false);
-        AnalogInput termometre;
-
-
-        try {
-            termometre= new AnalogInput(0);
-            termometre.start();
-            while(temperature > termometre.getDonnees()){
-                termometre.start();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (I2CFactory.UnsupportedBusNumberException ex) {
-            Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
+        owner.termometre.start();
+            
+        if(owner.termometre.getDonnees() >= theManuel.getTemperature()){
+            System.out.println("BONNE TEMPERATURE " + temperature);
+            return false;
         }
+        
+        
+        return true;
     }
     
     

@@ -49,6 +49,7 @@ public class PopupCatalogue extends JDialog implements ActionListener{
      * Handle the action that may occures.
      * @param e the action performed. 
      */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i=0; i<j.tabTheButton.length; i++){

@@ -54,7 +54,7 @@ public class AnalogInput implements Execute{
     private static final byte BASE_HAT_REG_RAW_DATA = (byte) 0x10;
     private static final byte BASE_HAT_REG_INPUT_VOLTAGE = (byte) 0x20;
     private static int numCanal = 0;  // A0 connector
-
+    private double donnees; // HEDI
     I2CDevice device;
     
     /**
@@ -94,7 +94,7 @@ public class AnalogInput implements Execute{
         list = new ArrayList<>();
         int i = 0;
         int j = 0;
-        for (;;) {
+        for (int a =0; a <3; a++){
 
             // now we will perform our first I2C READ operation to retrieve raw integration
             // results from DATA_0 and DATA_1 registers
@@ -110,10 +110,10 @@ public class AnalogInput implements Execute{
             } catch (InterruptedException ex) {
                 Logger.getLogger(AnalogInput.class.getName()).log(Level.SEVERE, null, ex);
             }
- /*     // if only byte to read 
+    /*     // if only byte to read 
         int dataRead= device.read(BASE_HAT_REG_RAW_DATA+numCanal);
         console.println("AnalogInput input A" + numCanal +" = " +  dataRead);
- */
+    */
             int prev = 1;
             int dataRead;
             byte buffer[] = new byte[2];
@@ -124,16 +124,22 @@ public class AnalogInput implements Execute{
                 Logger.getLogger(AnalogInput.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (BytesReceveived == 2) {
-                dataRead = (buffer[1] * 256) + (128 * j) + buffer[0];
-                //console.println("dataRead: " + dataRead);
-                list.add(dataRead);
+                
+               // dataRead = (buffer[1] * 256) + (128 * j) + buffer[0];
+                
+                dataRead = ((int)buffer[1])<<8 | buffer[0]; //BUTAHIER
+               
+                /*list.add(dataRead);
                 if(i >= 2){
                     if((list.get(i) - list.get(i-1)) < -120){
                         j++;
                     }
-                }
+                }*/
+                
                 if (dataRead < 4096 && dataRead > 0) {
                     console.println("Analog A0 = " + (double)dataRead/17.0);
+                    donnees = (double)dataRead/17.0; // HEDI
+                    
                     //console.println("AnalogInput A0 (decimal) = " + dataRead);
                     //console.println("AnalogInput A0 (hexa) = " + String.format("0x%02x", dataRead));
                  }
@@ -142,7 +148,14 @@ public class AnalogInput implements Execute{
         }
     }
 
-
+    
+    
+    public double getDonnees(){ // HEDI
+        System.out.println("LA TEMPERATURE CAPTE : " + donnees);
+        return donnees;
+    }
+    
+    
     private void fetchAllAvailableBusses(Console console) {
         // fetch all available busses
         try {
