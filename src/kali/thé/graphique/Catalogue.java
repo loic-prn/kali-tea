@@ -47,7 +47,7 @@ public class Catalogue extends JPanel implements ActionListener{
         
         for (int i = 0; i < 100; i++){
             
-            tabThe.add(new The(10, "The " + i, 50, "Desc" + i));
+            tabThe.add(new The(Math.random(), "The " + i, 50, "Desc" + i));
         }
         
         tabTheButton = new JButton[tabThe.size()];

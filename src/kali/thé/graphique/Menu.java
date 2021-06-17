@@ -17,6 +17,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,7 +53,9 @@ public class Menu extends JFrame implements ActionListener{
     JButton retour;
     JLabel heure;
     JLabel title;
+    JButton theProgShow;
     
+    //peripheriques
     DigitaBCMGpio led;
     AnalogInput termometre;
     buzzer b;
@@ -62,28 +65,35 @@ public class Menu extends JFrame implements ActionListener{
      * @param longueur longueur de la fenetre
      * @param largeur  largeur de la fenetre
      */
-    public Menu(int longueur, int largeur) {
-        led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
-        try {
-            termometre = new AnalogInput(0);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (I2CFactory.UnsupportedBusNumberException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        b = new buzzer(RaspiBcmPin.GPIO_18);
-        b.stop();
-        led.stop();
+    public Menu(int longueur, int largeur) throws InstantiationException, IllegalAccessException {
+//        led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+//        try {
+//            termometre = new AnalogInput(0);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (I2CFactory.UnsupportedBusNumberException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        b = new buzzer(RaspiBcmPin.GPIO_18);
+//        b.stop();
+//        led.stop();
         
         this.longueur = longueur;
         this.largeur = largeur;
         this.list = new ArrayList<>();
-        this.proglist = null;
+        this.proglist = new ArrayList<>();
        
         //timer pour heure
         javax.swing.Timer t = new javax.swing.Timer(1000, new ClockListener());
         t.start();
+        
+//        try {
+//            Class.forName("org.sqlite.JDBC").newInstance();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Connection cnx = DriveManager.getConnection("jdbc:sqlite:the.sqlite");
        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -99,6 +109,10 @@ public class Menu extends JFrame implements ActionListener{
             SimpleDateFormat df = new SimpleDateFormat("HH:mm");
             Date date = new Date();
             repaintMenu(df.format(Calendar.getInstance().getTime()));
+            if (proglist.isEmpty())
+                theProgShow.setEnabled(false);
+            else 
+                theProgShow.setEnabled(true);
         }
     }
     
@@ -119,6 +133,7 @@ public class Menu extends JFrame implements ActionListener{
      */
     private void initMenu(String heure){
         ImageIcon retourIcon = new ImageIcon(getClass().getResource("/icones/return.png"));
+        ImageIcon progIcon = new ImageIcon(getClass().getResource("/icones/alarm_clock2.png"));
         menu = new JPanel();
         retour.setIcon(retourIcon);
         retour.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -126,18 +141,25 @@ public class Menu extends JFrame implements ActionListener{
         retour.setBackground(Color.white);
         this.heure = new JLabel(heure);
         title.setFont(new Font("Arial",Font.CENTER_BASELINE,35));
+        theProgShow = new JButton();
+        theProgShow.setIcon(progIcon);
+        theProgShow.addActionListener(this);
+        theProgShow.setBorder(BorderFactory.createLineBorder(Color.white));
+        theProgShow.setBackground(Color.white);
         
         menu.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         menu.setPreferredSize(new Dimension(longueur,50));
         menu.setBackground(Color.white);
         
-        cont.insets = new Insets(0,0,0,500);
+        cont.insets = new Insets(0,0,0,475);
         cont.gridx = 0; cont.gridy = 0;
         menu.add(retour,cont);
-        
+        cont.insets = new Insets(0,0,0,50);
+        cont.gridx = 1; cont.gridy = 0;
+        menu.add(theProgShow,cont);
         cont.insets = new Insets(0,0,0,0);
-        cont.gridx = 10; cont.gridy = 0;
+        cont.gridx = 2; cont.gridy = 0;
         menu.add(this.heure,cont);
         cont.gridheight = 2;
         cont.gridx = 0; cont.gridy = 0;
@@ -255,7 +277,14 @@ public class Menu extends JFrame implements ActionListener{
             else if(pano.getClass() == Infusion.class){
                 this.setPano(new Accueil(this));
             }
+            else if(pano.getClass() == RecapTheProg.class){
+                this.setPano(new Accueil(this));
+            }
             
+        }
+        else if (e.getSource() == theProgShow){
+            System.out.println("tprog");
+            this.setPano(new RecapTheProg(this));
         }
     }
     

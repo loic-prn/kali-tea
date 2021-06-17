@@ -23,17 +23,17 @@ public class KaliThé {
      * @param args the command line arguments
      * 
      */
-    public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException {
+    public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException, InstantiationException, IllegalAccessException {
         // truc
         Menu me = new Menu(790,430);
         me.setVisible(true);
         //AnalogInput anal = new AnalogInput(0);
         //anal.start();
         // test unitaire sur GPIO_18
-        buzzer digitaBCMGpio = new buzzer(RaspiBcmPin.GPIO_18);
-        digitaBCMGpio.start();
-        Thread.sleep(1000);
-        digitaBCMGpio.stop();
+//        buzzer digitaBCMGpio = new buzzer(RaspiBcmPin.GPIO_18);
+//        digitaBCMGpio.start();
+//        Thread.sleep(1000);
+//        digitaBCMGpio.stop();
     }
     
 }
