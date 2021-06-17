@@ -264,11 +264,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
      * here are handled the differents action performed on this page.
      * @param e 
      */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-        if(e.getSource()==preparer){
-            //double temps = (Double.parseDouble(chaineHeures) * 60) + (Double.parseDouble(chaineMin));
+    
+    public void startThe(){
+        //double temps = (Double.parseDouble(chaineHeures) * 60) + (Double.parseDouble(chaineMin));
             
             tempsmin = (int)minutes.getValue();
             tempssec = (int)secondes.getValue();
@@ -290,6 +288,13 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             timer = new javax.swing.Timer(1000, new Preparation.ClockListener());
             timer.start();
             preCho = prechauffe();
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource()==preparer){
+            this.startThe();
         }
     }
     

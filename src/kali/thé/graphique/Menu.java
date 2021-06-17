@@ -60,6 +60,8 @@ public class Menu extends JFrame implements ActionListener{
     AnalogInput termometre;
     buzzer b;
     
+    int cpt;
+    
     /**
      * 
      * @param longueur longueur de la fenetre
@@ -102,10 +104,23 @@ public class Menu extends JFrame implements ActionListener{
             SimpleDateFormat df = new SimpleDateFormat("HH:mm");
             Date date = new Date();
             repaintMenu(df.format(Calendar.getInstance().getTime()));
-            if (proglist.isEmpty())
-                theProgShow.setEnabled(false);
-            else 
-                theProgShow.setEnabled(true);
+            
+            
+            ++cpt;
+            if (cpt == 10){ //chaque minute, on verifie si un thé programmé doit commencer
+                cpt = 0;
+                if (!proglist.isEmpty()){
+                    for (int i=0; i<proglist.size(); i++){
+                        if (proglist.get(i).getPretPour().getHours() == date.getHours() && proglist.get(i).getPretPour().getMinutes()== date.getMinutes()){
+                            if (proglist.get(i).isRecurrence(date.getDay())){
+                                Infusion temp = new Infusion(Menu.this,proglist.get(i));
+                                setPano(temp);
+                                temp.startThe();
+                            }
+                        }
+                    }
+                }
+            }  
         }
     }
     

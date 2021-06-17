@@ -230,18 +230,23 @@ public class Infusion extends JPanel implements ActionListener{
         }*/
     }
 
+    public void startThe(){
+        precho = "En préchauffe";
+        init();
+        timer = new javax.swing.Timer(1000, new Infusion.ClockListener());
+        timer.start();
+        preCho = prechauffe();
+    }
+    
     /**
      * 
      * @param e 
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        precho = "En préchauffe";
-        init();
-        timer = new javax.swing.Timer(1000, new Infusion.ClockListener());
-        timer.start();
-        preCho = prechauffe();
-        
+        if (e.getSource() == infuser){
+            this.startThe();
+        }
     }
     
     private boolean prechauffe(){

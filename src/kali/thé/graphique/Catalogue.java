@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import kali.thé.Connect;
+import kali.thé.SQLRequest;
 import kali.thé.modele.The;
 
 /**
@@ -32,22 +34,26 @@ public class Catalogue extends JPanel implements ActionListener{
     ArrayList<The> tabThe;
     JScrollPane scrollPane;
     public boolean popup;
-    
+    private SQLRequest sql;
     
     /**
      * Catalogue constructor
      * @param o the parent menu.
      * @param pop if the popup need to appear.
      */
-    public Catalogue(Menu o, boolean pop) {
+    public Catalogue(Menu o, boolean pop) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         popup = pop;
         this.owner = o;
         this.setBackground(Color.white);
         tabThe = new ArrayList<The>();
         
-        for (int i = 0; i < 100; i++){
+        sql = new SQLRequest();
+        
+        int a = sql.selectDesc().size();
+        
+        for (int i = 0; i < a; i++){
             
-            tabThe.add(new The(Math.random(), "The " + i, 50, "Desc" + i));
+            tabThe.add(new The(sql.selectDuree().get(i), sql.selectName().get(i), sql.selectTemperature().get(i), sql.selectDesc().get(i)));
         }
         
         tabTheButton = new JButton[tabThe.size()];
