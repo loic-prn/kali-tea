@@ -39,6 +39,7 @@ public class Infusion extends JPanel implements ActionListener{
     JLabel tempsRestant;
     JProgressBar progressTime;
     JScrollPane scrollPane;
+    JLabel indicationEtat;
     
     int percentageComplete = 0;
     int cpt = 0;
@@ -92,16 +93,23 @@ public class Infusion extends JPanel implements ActionListener{
         progressTime.setValue(percentageComplete);
         progressTime.setForeground(Color.red);
         
+        indicationEtat = new JLabel(precho);
+        indicationEtat.setForeground(Color.red);
+        
         tempsmin = (int)t.getTempsInfusion();
         double temp = t.getTempsInfusion() - tempsmin;
         tempssec = (int)(temp*60);
         tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
+        
+        
         
         this.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();
         owner.setTitle("Infusion");
         owner.retour.setEnabled(true);
         owner.title.setVisible(true);
+        
+        
         
         
         cont.insets = new Insets(10,0,10,0);
@@ -119,8 +127,13 @@ public class Infusion extends JPanel implements ActionListener{
         cont.gridy = 3;
         cont.fill = GridBagConstraints.BOTH;
         this.add(progressTime, cont);
+        
         cont.gridx = 0;
         cont.gridy = 4;
+        this.add(indicationEtat,cont);
+        
+        cont.gridx = 0;
+        cont.gridy = 5;
         cont.fill = GridBagConstraints.NONE;
         this.add(tempsRestant, cont);
     }
