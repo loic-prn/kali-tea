@@ -152,7 +152,7 @@ public class AnalogInput implements Execute{
     
     
     public double getDonnees(){ // HEDI
-        System.out.println("LA TEMPERATURE CAPTE : " + donnees);
+        System.out.println("LA TEMPERATURE CAPTEE : " + donnees);
         return donnees;
     }
     

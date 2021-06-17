@@ -62,6 +62,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     double temps = 0.0;
     int temperatureGET = 0;
     The theManuel;
+    String precho = " ";
     
     boolean preCho = true;
     
@@ -130,7 +131,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
         
-        prechauffeTxt = new JLabel(" ");
+        prechauffeTxt = new JLabel(precho);
         prechauffeTxt.setForeground(Color.red);
         
         cont.fill = GridBagConstraints.CENTER;
@@ -227,7 +228,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
                 
                 owner.led.stop();
-                prechauffeTxt.setText("Infusion");
+                precho = "     Infusion     ";
+                init();
+                
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
                 init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
@@ -238,11 +241,14 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             
             else if ((cpt*100/(int)(temps*60) == 100)){
                 timer.stop();
+                precho = "                   ";
+                init();
                 cpt = 0;
                 percentageComplete = 0;
                 owner.retour.setEnabled(true);
                 preparer.setEnabled(true);
                 owner.theProgShow.setEnabled(true);
+                
                 
                 owner.b.start();
                 try {
@@ -263,6 +269,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         
         if(e.getSource()==preparer){
             //double temps = (Double.parseDouble(chaineHeures) * 60) + (Double.parseDouble(chaineMin));
+            
             tempsmin = (int)minutes.getValue();
             tempssec = (int)secondes.getValue();
             temps = tempsmin + Double.valueOf(tempssec)/60;
@@ -277,11 +284,12 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             
             
 
-
-            prechauffeTxt.setText("En préchauffe");
+            
+            precho = "En préchauffe";
+            init();
             timer = new javax.swing.Timer(1000, new Preparation.ClockListener());
             timer.start();
-            
+            preCho = prechauffe();
         }
     }
     
@@ -290,12 +298,14 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         owner.retour.setEnabled(false);
         preparer.setEnabled(false);
         owner.termometre.start();
-            
+        
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + Double.toString(owner.termometre.getDonnees()) + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        
         if(owner.termometre.getDonnees() >= theManuel.getTemperature()){
-            System.out.println("BONNE TEMPERATURE " + temperature);
+            System.out.println("BONNE TEMPERATURE " + theManuel.getTemperature());
             return false;
         }
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + Double.toString(owner.termometre.getDonnees()) + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        
         
         return true;
     }

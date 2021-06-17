@@ -46,6 +46,8 @@ public class Infusion extends JPanel implements ActionListener{
     int temperatureGET = 0;
     int tempsmin = 0;
     int tempssec = 0;
+    boolean preCho = true;
+    String precho = " ";
     
     javax.swing.Timer timer;
     
@@ -128,7 +130,24 @@ public class Infusion extends JPanel implements ActionListener{
      */
     class ClockListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if((cpt*100/(int)(temps*60) < 100)){
+            
+            if(preCho){
+                owner.led.start();
+                preCho = prechauffe();
+                owner.retour.setEnabled(false);
+                infuser.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
+            }
+            
+            else if(!preCho && (cpt*100/(int)(temps*60) < 100)){
+                owner.led.stop();
+                precho = "     Infusion     ";
+                init();
+                
+                cpt++;
+                percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
+                init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
+                
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60));
                 init();
@@ -154,6 +173,51 @@ public class Infusion extends JPanel implements ActionListener{
 //                owner.b.stop();
             }
         }
+        
+        /*public void actionPerformed(ActionEvent e) { 
+            
+            if(preCho){
+                owner.led.start();
+                preCho = prechauffe();
+                owner.retour.setEnabled(false);
+                preparer.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
+            }
+            
+            else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
+                
+                owner.led.stop();
+                precho = "     Infusion     ";
+                init();
+                
+                cpt++;
+                percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
+                init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
+                
+                //INFUSION
+                
+            }
+            
+            else if ((cpt*100/(int)(temps*60) == 100)){
+                timer.stop();
+                precho = "                   ";
+                init();
+                cpt = 0;
+                percentageComplete = 0;
+                owner.retour.setEnabled(true);
+                preparer.setEnabled(true);
+                owner.theProgShow.setEnabled(true);
+                
+                
+                owner.b.start();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                owner.b.stop();
+            }
+        }*/
     }
 
     /**
@@ -162,8 +226,28 @@ public class Infusion extends JPanel implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        precho = "En préchauffe";
+        init();
         timer = new javax.swing.Timer(1000, new Infusion.ClockListener());
         timer.start();
+        preCho = prechauffe();
+        
+    }
+    
+    private boolean prechauffe(){
+        
+        owner.retour.setEnabled(false);
+        owner.termometre.start();
+        
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + Double.toString(owner.termometre.getDonnees()) + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        
+        if(owner.termometre.getDonnees() >= t.getTemperature()){
+            System.out.println("BONNE TEMPERATURE " + t.getTemperature());
+            return false;
+        }
+        
+        
+        return true;
     }
     
     /**
