@@ -118,8 +118,6 @@ public class Menu extends JFrame implements ActionListener{
         SimpleDateFormat s = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         initPan(s.format(date));
-        if (j.getClass() == Accueil.class)
-            theProgShow.setEnabled(true);
     }
     
     /**
@@ -141,7 +139,7 @@ public class Menu extends JFrame implements ActionListener{
         theProgShow.addActionListener(this);
         theProgShow.setBorder(BorderFactory.createLineBorder(Color.white));
         theProgShow.setBackground(Color.white);
-        theProgShow.setEnabled(false);
+        
         
         menu.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();

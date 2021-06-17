@@ -219,6 +219,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             if(preCho){
                 owner.led.start();
                 preCho = prechauffe();
+                owner.retour.setEnabled(false);
+                preparer.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
             }
             
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
@@ -228,8 +231,6 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
                 init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
-                owner.retour.setEnabled(false);
-                preparer.setEnabled(false);
                 
                 //INFUSION
                 
@@ -241,6 +242,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 percentageComplete = 0;
                 owner.retour.setEnabled(true);
                 preparer.setEnabled(true);
+                owner.theProgShow.setEnabled(true);
                 
                 owner.b.start();
                 try {

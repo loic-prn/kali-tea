@@ -134,6 +134,7 @@ public class Infusion extends JPanel implements ActionListener{
                 init();
                 owner.retour.setEnabled(false);
                 infuser.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
 //                owner.led.start();
             }
             else if ((cpt*100/(int)(temps*60) == 100)){
@@ -142,6 +143,7 @@ public class Infusion extends JPanel implements ActionListener{
                 percentageComplete = 0;
                 owner.retour.setEnabled(true);
                 infuser.setEnabled(true);
+                owner.theProgShow.setEnabled(true);
 //                owner.led.stop();
 //                owner.b.start();
                 try {
