@@ -66,18 +66,18 @@ public class Menu extends JFrame implements ActionListener{
      * @param largeur  largeur de la fenetre
      */
     public Menu(int longueur, int largeur) throws InstantiationException, IllegalAccessException {
-//        led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
-//        try {
-//            termometre = new AnalogInput(0);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (I2CFactory.UnsupportedBusNumberException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        b = new buzzer(RaspiBcmPin.GPIO_18);
-//        b.stop();
-//        led.stop();
+        led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        try {
+            termometre = new AnalogInput(0);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (I2CFactory.UnsupportedBusNumberException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        b = new buzzer(RaspiBcmPin.GPIO_18);
+        b.stop();
+        led.stop();
         
         this.longueur = longueur;
         this.largeur = largeur;
@@ -87,13 +87,6 @@ public class Menu extends JFrame implements ActionListener{
         //timer pour heure
         javax.swing.Timer t = new javax.swing.Timer(1000, new ClockListener());
         t.start();
-        
-//        try {
-//            Class.forName("org.sqlite.JDBC").newInstance();
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        Connection cnx = DriveManager.getConnection("jdbc:sqlite:the.sqlite");
        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -125,6 +118,8 @@ public class Menu extends JFrame implements ActionListener{
         SimpleDateFormat s = new SimpleDateFormat("HH:mm");
         Date date = new Date();
         initPan(s.format(date));
+        if (j.getClass() == Accueil.class)
+            theProgShow.setEnabled(true);
     }
     
     /**
@@ -146,6 +141,7 @@ public class Menu extends JFrame implements ActionListener{
         theProgShow.addActionListener(this);
         theProgShow.setBorder(BorderFactory.createLineBorder(Color.white));
         theProgShow.setBackground(Color.white);
+        theProgShow.setEnabled(false);
         
         menu.setLayout(new GridBagLayout());
         GridBagConstraints cont = new GridBagConstraints();

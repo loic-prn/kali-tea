@@ -85,7 +85,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
      */
     private void init(){
         this.removeAll();
-         Font police1 = new Font("Arial",Font.BOLD,15);
+        Font police1 = new Font("Arial",Font.BOLD,15);
         Color vert = new Color(0x00b300);
         owner.setTitle("Préparation");
         owner.retour.setEnabled(true);
@@ -130,7 +130,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
         tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
         
-        prechauffeTxt = new JLabel("");
+        prechauffeTxt = new JLabel(" ");
         prechauffeTxt.setForeground(Color.red);
         
         cont.fill = GridBagConstraints.CENTER;
@@ -146,9 +146,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         
         cont.gridy = 2;
         cont.insets = new Insets(0,0,40,0);
-        this.add(temperature,cont);
-        
-        
+        this.add(temperature,cont);        
         
         cont.fill = GridBagConstraints.CENTER;
         cont.insets = new Insets(0,0,10,0);
@@ -295,7 +293,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             System.out.println("BONNE TEMPERATURE " + temperature);
             return false;
         }
-        
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + Double.toString(owner.termometre.getDonnees()) + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         
         return true;
     }

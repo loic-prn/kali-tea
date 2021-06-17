@@ -125,24 +125,25 @@ public class AnalogInput implements Execute{
             }
             if (BytesReceveived == 2) {
                 
-               // dataRead = (buffer[1] * 256) + (128 * j) + buffer[0];
+                dataRead = (buffer[1] * 256) + (128 * j) + buffer[0];
                 
-                dataRead = ((int)buffer[1])<<8 | buffer[0]; //BUTAHIER
+                //dataRead = ((int)buffer[1])<<8 | buffer[0]; //BUTAHIER
                
-                /*list.add(dataRead);
+                list.add(dataRead);
                 if(i >= 2){
                     if((list.get(i) - list.get(i-1)) < -120){
                         j++;
                     }
-                }*/
+                }
                 
                 if (dataRead < 4096 && dataRead > 0) {
-                    console.println("Analog A0 = " + (double)dataRead/17.0);
+                    console.println("Analog A0 ====================== " + (double)dataRead/17.0);
                     donnees = (double)dataRead/17.0; // HEDI
+                    
                     
                     //console.println("AnalogInput A0 (decimal) = " + dataRead);
                     //console.println("AnalogInput A0 (hexa) = " + String.format("0x%02x", dataRead));
-                 }
+                }
                 i++;
             }
         }
