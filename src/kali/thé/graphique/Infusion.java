@@ -148,29 +148,26 @@ public class Infusion extends JPanel implements ActionListener{
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
                 init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
                 
-                cpt++;
-                percentageComplete = (cpt*100/(int)(temps*60));
-                init();
-                owner.retour.setEnabled(false);
-                infuser.setEnabled(false);
-                owner.theProgShow.setEnabled(false);
+              
+               
 //                owner.led.start();
             }
             else if ((cpt*100/(int)(temps*60) == 100)){
                 timer.stop();
+                precho = "                   ";
+                init();
                 cpt = 0;
                 percentageComplete = 0;
                 owner.retour.setEnabled(true);
                 infuser.setEnabled(true);
                 owner.theProgShow.setEnabled(true);
-//                owner.led.stop();
-//                owner.b.start();
+                owner.b.start();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
                 }
-//                owner.b.stop();
+                owner.b.stop();
             }
         }
         
