@@ -79,6 +79,7 @@ public class Infusion extends JPanel implements ActionListener{
         description = new JTextArea(t.getDescription());
         description.setEditable(false);
         description.setLineWrap(true);
+        description.setWrapStyleWord(true);
         
         scrollPane = new JScrollPane(description);
         scrollPane.setPreferredSize(new Dimension(300,100));
