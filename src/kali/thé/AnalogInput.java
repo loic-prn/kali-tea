@@ -94,12 +94,6 @@ public class AnalogInput implements Execute{
 
         // allow for user to exit program using CTRL-C
         //console.promptForExit();
-        ArrayList<Double> list;
-        list = new ArrayList<>();
-        
-        int i = 0;
-        int j = 0;
-        boolean is = true;
         for (int a =0; a <3; a++){
 
             // now we will perform our first I2C READ operation to retrieve raw integration
@@ -131,26 +125,17 @@ public class AnalogInput implements Execute{
             }
             if (BytesReceveived == 2) {
                 
-                //dataRead = (buffer[1] * 256) + 128  + buffer[0];
                 
                 dataRead = ((int)buffer[1])<<8 | (int)buffer[0]; //BUTAHIER
-               
-                list.add(dataRead/17.0);
-//                if(i >= 2){
-//                    if(0 == ((Math.floor(list.get(i)) - Math.floor(list.get(i-1))))){
-//                        compteur++;
-//                    }
-//                }
                 
                 if (dataRead < 4096 && dataRead > 0) {
                     console.println("Analog A0  " + (double)dataRead/5.0);
-                    donnees = dataRead;
+                    donnees = dataRead/5.0;
                     
                     
-                    System.out.println("AnalogInput A0 (decimal) = " + dataRead/5.0);
+                    System.out.println("AnalogInput A0 (decimal) = " + (double)dataRead/5.0);
                     //console.println("AnalogInput A0 (hexa) = " + String.format("0x%02x", dataRead));
                 }
-                i++;
             }
         }
     }
