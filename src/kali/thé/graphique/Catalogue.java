@@ -56,7 +56,7 @@ public class Catalogue extends JPanel implements ActionListener{
             //tabThe.add(new The(11, "lulu", 34, "lulu il sait pas faire de tableau et ça rend un peu fou quand même"));
             //The truc = new The(sql.selectDuree().get(i), sql.selectName().get(i), sql.selectTemperature().get(i), sql.selectDesc().get(i));
             //System.out.println(truc.getNom() + "\n" + truc.getTemperature() + "\n" + truc.getTempsInfusion() + "\n" + truc.getDescription());
-            tabThe.add(new The(sql.selectDuree().get(i), sql.selectName().get(i), sql.selectTemperature().get(i), sql.selectDesc().get(i)));
+            tabThe.add(new The(sql.selectDuree().get(i), sql.selectName().get(i), sql.selectTemperature().get(i), sql.selectDesc().get(i),sql.selectCate().get(i)));
         }
         
         tabTheButton = new JButton[tabThe.size()];
@@ -84,7 +84,7 @@ public class Catalogue extends JPanel implements ActionListener{
         
         
         for(int i = 0; i < tabThe.size(); i++){
-            tabTheButton[i] = new JButton(tabThe.get(i).getNom());
+            tabTheButton[i] = new JButton(tabThe.get(i).getCategorie() + " : " + tabThe.get(i).getNom());
             tabTheButton[i].addActionListener(this);
             tabTheButton[i].setPreferredSize(new Dimension(282,30));
             tabTheButton[i].setForeground(Color.white);

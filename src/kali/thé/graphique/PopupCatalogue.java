@@ -54,7 +54,7 @@ public class PopupCatalogue extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         for (int i=0; i<j.tabTheButton.length; i++){
             if (e.getSource() == j.tabTheButton[i]){
-                ret = new The(j.tabThe.get(i).getTempsInfusion(),Integer.toString(i),j.tabThe.get(i).getTemperature(),j.tabThe.get(i).getDescription());
+                ret = new The(j.tabThe.get(i).getTempsInfusion(),Integer.toString(i),j.tabThe.get(i).getTemperature(),j.tabThe.get(i).getDescription(),j.tabThe.get(i).getCategorie());
                 this.setVisible(false);
             }
         }

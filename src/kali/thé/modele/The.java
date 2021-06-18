@@ -15,6 +15,7 @@ public class The {
     private String nom;
     private int temperature;
     private String description;
+    private String categorie;
 
     
     /**
@@ -25,11 +26,12 @@ public class The {
      * @param description Description du thé
      */
     
-    public The(double tempsInfusion, String nom, int temperature, String description) {
+    public The(double tempsInfusion, String nom, int temperature, String description,String categorie) {
         this.tempsInfusion = tempsInfusion;
         this.nom = nom;
         this.temperature = temperature;
         this.description = description;
+        this.categorie = categorie;
     }
 
     public double getTempsInfusion() {
@@ -47,6 +49,10 @@ public class The {
     public String getDescription() {
         return description;
     }
+
+    public String getCategorie() {
+        return categorie;
+    }    
     
     
     

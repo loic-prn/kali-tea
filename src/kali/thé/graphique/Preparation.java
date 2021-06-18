@@ -273,7 +273,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             temps = tempsmin + Double.valueOf(tempssec)/60;
             
             System.out.println(temps);
-            theManuel = new The(temps,"",slider1.getValue(),"");
+            theManuel = new The(temps,"",slider1.getValue(),"","");
             
             System.out.println("\n");
             System.out.println("Thé crée : \n" + "temps : " + temps + "\n" + "temperature : " + slider1.getValue());

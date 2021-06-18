@@ -27,7 +27,7 @@ public class TheProgramme extends The{
      * @param recurrence Which days do you want it.
      */
     public TheProgramme(Date pretPour, boolean[] recurrence, The t) {
-        super(t.getTempsInfusion(),t.getNom(),t.getTemperature(),t.getDescription());
+        super(t.getTempsInfusion(),t.getNom(),t.getTemperature(),t.getDescription(),t.getCategorie());
         this.pretPour = pretPour;
         this.recurrence = new boolean[recurrence.length];
         for (int i=0; i<recurrence.length; i++)
