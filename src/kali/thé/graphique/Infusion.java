@@ -257,9 +257,23 @@ public class Infusion extends JPanel implements ActionListener{
         
         owner.retour.setEnabled(false);
         owner.termometre.start();
-        
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + Double.toString(owner.termometre.getDonnees()) + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        
+        int matemp = 0;
+        System.out.println("> " + Double.toString(owner.termometre.getDonnees()) + " <");
+        /*if(t.getTemperature() == 60){
+            matemp = 80;
+        }
+        else if(t.getTemperature() == 75){
+            matemp = 93;
+        }
+        else if(t.getTemperature() == 85){
+            matemp = 123;
+        }
+        else if(t.getTemperature() == 90){
+            matemp = 170;
+        }
+        else if(t.getTemperature() == 95){
+            matemp = 175;
+        }*/
         if(owner.termometre.getDonnees() >= t.getTemperature()){
             System.out.println("BONNE TEMPERATURE " + t.getTemperature());
             return false;

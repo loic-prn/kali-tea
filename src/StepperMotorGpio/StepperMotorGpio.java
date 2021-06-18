@@ -79,10 +79,10 @@ public class StepperMotorGpio implements Execute{
         //  a smooth movement as the previous method, and it requires double the current, but as
         //  return it generates double the torque.)
         byte[] double_step_sequence = new byte[4];
-        double_step_sequence[0] = (byte) 0b0011;
-        double_step_sequence[1] = (byte) 0b0110;
-        double_step_sequence[2] = (byte) 0b1100;
-        double_step_sequence[3] = (byte) 0b1001;
+        double_step_sequence[0] = (byte) 0x9;//0b1000; //0b0011; //9
+        double_step_sequence[1] = (byte) 0x5;//0b0001;//0b0110; // 5
+        double_step_sequence[2] = (byte) 0x6;//0b0100;//0b1100; // 6
+        double_step_sequence[3] = (byte) 0xA;//0b0010;//0b1001; // A
 
         // define stepper parameters before attempting to control motor
         // anything lower than 2 ms does not work for my sample motor using single step sequence
@@ -95,70 +95,64 @@ public class StepperMotorGpio implements Execute{
         motor.setStepsPerRevolution(2048);
 
         // test motor control : STEPPING FORWARD for half revolution
-        System.out.println("   Motor FORWARD for 2048 steps.");
-        //motor.step(2048);
-        System.out.println("   Motor STOPPED for 2 seconds.");
+
        try {
-           for(int i = 0; i < 500; ++i){
-                //motor.step(1);
-                motor.step(-3);
-                Thread.sleep(100);
-           }
-
-           /*Thread.sleep(2000);
-
-            // test motor control : STEPPING REVERSE
-            System.out.println("   Motor REVERSE for 2048 steps.");
-            motor.step(-2048);
-            
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);
-
-            // test motor control : ROTATE FORWARD
-            System.out.println("   Motor FORWARD for 2 revolutions.");
-            motor.rotate(2);
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);
-
-            // test motor control : ROTATE REVERSE
-            System.out.println("   Motor REVERSE for 2 revolutions.");
-            motor.rotate(-2);
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);
-
-            // test motor control : TIMED FORWARD
-            System.out.println("   Motor FORWARD for 5 seconds.");
-            motor.forward(5000);
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);
-
-            // test motor control : TIMED REVERSE
-            System.out.println("   Motor REVERSE for 5 seconds.");
-            motor.reverse(5000);
-            System.out.println("   Motor STOPPED for 2 seconds.");
-            Thread.sleep(2000);*/
-        
+           // descendre = positif
+           // monter = négatif
+           motor.rotate(1.5);
+           Thread.sleep(100);
         } catch (InterruptedException ex) {
            Logger.getLogger(StepperMotorGpio.class.getName()).log(Level.SEVERE, null, ex);
        }
-/*
-        // test motor control : ROTATE FORWARD with different timing and sequence
-        System.out.println("   Motor FORWARD with slower speed and higher torque for 1 revolution.");
-        motor.setStepSequence(double_step_sequence);
-        motor.setStepInterval(10);
-        motor.rotate(1);
-*/
-        System.out.println("   Motor STOPPED.");
-
         // final stop to ensure no motor activity
         motor.stop();
 
         // stop all GPIO activity/threads by shutting down the GPIO controller
         // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
         gpio.shutdown();
-
-        System.out.println("Exiting StepperMotorGpio");
     }
-
-  
+    
+    public void monter(){
+        byte[] double_step_sequence = new byte[4];
+        double_step_sequence[0] = (byte) 0x9;//0b1000; //0b0011; //9
+        double_step_sequence[1] = (byte) 0x5;//0b0001;//0b0110; // 5
+        double_step_sequence[2] = (byte) 0x6;//0b0100;//0b1100; // 6
+        double_step_sequence[3] = (byte) 0xA;//0b0010;//0b1001; // A
+        
+        motor.setStepInterval(2);
+        motor.setStepSequence(double_step_sequence);
+        motor.setStepsPerRevolution(2048);
+        
+        try {
+            motor.rotate(-1);
+            Thread.sleep(100);
+        } catch(InterruptedException ex){
+            Logger.getLogger(StepperMotorGpio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        motor.stop();
+        gpio.shutdown();
+    }
+    
+        public void descendre(){
+        byte[] double_step_sequence = new byte[4];
+        double_step_sequence[0] = (byte) 0x9;//0b1000; //0b0011; //9
+        double_step_sequence[1] = (byte) 0x5;//0b0001;//0b0110; // 5
+        double_step_sequence[2] = (byte) 0x6;//0b0100;//0b1100; // 6
+        double_step_sequence[3] = (byte) 0xA;//0b0010;//0b1001; // A
+        
+        motor.setStepInterval(2);
+        motor.setStepSequence(double_step_sequence);
+        motor.setStepsPerRevolution(2048);
+        
+        try {
+            motor.rotate(1);
+            Thread.sleep(100);
+        } catch(InterruptedException ex){
+            Logger.getLogger(StepperMotorGpio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        motor.stop();
+        gpio.shutdown();
+    }
 }

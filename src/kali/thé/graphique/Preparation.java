@@ -305,7 +305,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         owner.termometre.start();
         
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + Double.toString(owner.termometre.getDonnees()) + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        
+        //if(theManuel.getTemperature)
         if(owner.termometre.getDonnees() >= theManuel.getTemperature()){
             System.out.println("BONNE TEMPERATURE " + theManuel.getTemperature());
             return false;

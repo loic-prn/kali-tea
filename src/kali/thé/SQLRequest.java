@@ -34,7 +34,7 @@ public class SQLRequest {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
-                System.out.println(rs.getString("nom"));
+                //System.out.println(rs.getString("nom"));
                 ret.add(rs.getString("nom"));
             }
         } catch (SQLException e) {
@@ -52,7 +52,7 @@ public class SQLRequest {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                System.out.println(rs.getString("Desciption"));
+                //System.out.println(rs.getString("Desciption"));
                 ret.add(rs.getString("Desciption"));
             }
         } catch (SQLException e) {
@@ -70,7 +70,7 @@ public class SQLRequest {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                System.out.println(rs.getString("Categorie"));
+                //System.out.println(rs.getString("Categorie"));
                 ret.add(rs.getString("Categorie"));
             }
         } catch (SQLException e) {
@@ -88,7 +88,7 @@ public class SQLRequest {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                System.out.println(rs.getInt("TemperatureEau"));
+                //System.out.println(rs.getInt("TemperatureEau"));
                 ret.add(rs.getInt("TemperatureEau"));
             }
         } catch (SQLException e) {
@@ -106,7 +106,7 @@ public class SQLRequest {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                System.out.println(rs.getDouble("DureeInfusion"));
+                //System.out.println(rs.getDouble("DureeInfusion"));
                 ret.add(rs.getDouble("DureeInfusion"));
             }
         } catch (SQLException e) {

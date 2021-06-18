@@ -36,8 +36,9 @@ public class KaliThé {
 //        digitaBCMGpio.stop();        
         //SQLRequest app = new SQLRequest();
         //app.selectName();
-          //StepperMotorGpio cx28byj48 = new StepperMotorGpio(RaspiBcmPin.GPIO_22, RaspiBcmPin.GPIO_23, RaspiBcmPin.GPIO_24, RaspiBcmPin.GPIO_25);
-          //cx28byj48.start();
+          StepperMotorGpio cx28byj48 = new StepperMotorGpio(RaspiBcmPin.GPIO_22, RaspiBcmPin.GPIO_23, RaspiBcmPin.GPIO_24, RaspiBcmPin.GPIO_25);
+          cx28byj48.monter();
+          cx28byj48.descendre();
 
     }
     
