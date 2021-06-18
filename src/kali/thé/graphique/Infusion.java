@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import kali.thé.modele.The;
 
@@ -33,7 +34,7 @@ public class Infusion extends JPanel implements ActionListener{
     The t;
     
     JLabel titreThe;
-    JLabel description;
+    JTextArea description;
     JButton infuser;
     //Slider
     JLabel tempsRestant;
@@ -75,7 +76,9 @@ public class Infusion extends JPanel implements ActionListener{
         titreThe = new JLabel(t.getNom());
         titreThe.setFont(police1);
         
-        description = new JLabel(t.getDescription());
+        description = new JTextArea(t.getDescription());
+        description.setEditable(false);
+        description.setLineWrap(true);
         
         scrollPane = new JScrollPane(description);
         scrollPane.setPreferredSize(new Dimension(300,100));
