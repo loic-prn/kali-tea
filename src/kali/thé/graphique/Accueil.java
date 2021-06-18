@@ -51,7 +51,7 @@ public class Accueil extends JPanel implements ActionListener{
      */
     private void init(){
         Color vert = new Color(0x00b300);
-        Font police1 = new Font("Arial",Font.BOLD,15);
+        Font police1 = new Font("Arial",Font.BOLD,18);
         //inits
         logo = new JLabel();
         logo.setIcon(new ImageIcon(getClass().getResource("/icones/logoKali-Thé2.png")));

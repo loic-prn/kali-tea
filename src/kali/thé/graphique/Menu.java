@@ -33,6 +33,7 @@ import javax.swing.JPanel;
 import kali.thé.AnalogInput;
 import kali.thé.DigitaBCMGpio;
 import kali.thé.DigitaBCMGpio;
+import kali.thé.StepperMotorGpio;
 import kali.thé.buzzer;
 import kali.thé.modele.*;
 
@@ -59,6 +60,7 @@ public class Menu extends JFrame implements ActionListener{
     DigitaBCMGpio led;
     AnalogInput termometre;
     buzzer b;
+    StepperMotorGpio motor;
     
     int cpt;
     
@@ -80,6 +82,7 @@ public class Menu extends JFrame implements ActionListener{
         b = new buzzer(RaspiBcmPin.GPIO_18);
         b.stop();
         led.stop();
+        motor = new StepperMotorGpio(RaspiBcmPin.GPIO_22, RaspiBcmPin.GPIO_23, RaspiBcmPin.GPIO_24, RaspiBcmPin.GPIO_25);
         
         this.longueur = longueur;
         this.largeur = largeur;

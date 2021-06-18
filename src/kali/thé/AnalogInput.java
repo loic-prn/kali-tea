@@ -86,10 +86,10 @@ public class AnalogInput implements Execute{
         final Console console = new Console();
 
         // print program title/header
-        console.title("<-- The Pi4J Project -->", "I2C Analog Conversion");
+        //console.title("<-- The Pi4J Project -->", "I2C Analog Conversion");
 
         // allow for user to exit program using CTRL-C
-        console.promptForExit();
+        //console.promptForExit();
         ArrayList<Integer> list;
         list = new ArrayList<>();
         int i = 0;
@@ -137,7 +137,7 @@ public class AnalogInput implements Execute{
                 }
                 
                 if (dataRead < 4096 && dataRead > 0) {
-                    console.println("Analog A0 ====================== " + (double)dataRead/17.0);
+                    console.println("Analog A0  " + (double)dataRead/17.0);
                     donnees = (double)dataRead/17.0; // HEDI
                     
                     
