@@ -68,7 +68,7 @@ public class Catalogue extends JPanel implements ActionListener{
      */
     private void init(){
         Color vert = new Color(0x00b300);
-        Font police1 = new Font("Arial",Font.BOLD,15);
+        Font police1 = new Font("Arial",Font.BOLD,18);
         owner.setTitle("Catalogue");
         owner.retour.setEnabled(true);
         owner.title.setVisible(true);
@@ -86,7 +86,7 @@ public class Catalogue extends JPanel implements ActionListener{
         for(int i = 0; i < tabThe.size(); i++){
             tabTheButton[i] = new JButton(tabThe.get(i).getCategorie() + " : " + tabThe.get(i).getNom());
             tabTheButton[i].addActionListener(this);
-            tabTheButton[i].setPreferredSize(new Dimension(282,30));
+            tabTheButton[i].setPreferredSize(new Dimension(482,40));
             tabTheButton[i].setForeground(Color.white);
             tabTheButton[i].setBackground(vert);
             tabTheButton[i].setFont(police1);
@@ -96,7 +96,7 @@ public class Catalogue extends JPanel implements ActionListener{
         
         
         JScrollPane scrollPane = new JScrollPane(pane);
-        scrollPane.setPreferredSize(new Dimension(300,400));
+        scrollPane.setPreferredSize(new Dimension(500,400));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         

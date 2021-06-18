@@ -78,7 +78,9 @@ public class Programmation extends JPanel implements ActionListener{
      */
     private void init(){
         this.removeAll();
-         Font police1 = new Font("Arial",Font.BOLD,15);
+        
+        Font police1 = new Font("Arial",Font.BOLD,18);
+        Font police2 = new Font("Arial",Font.PLAIN,18);
         owner.setPano(this);
         //inits
         m = new Integer[61];
@@ -130,6 +132,7 @@ public class Programmation extends JPanel implements ActionListener{
         cont.gridy = 0;
         this.add(heure, cont);
         
+        
         cont.ipadx = 60;
         cont.gridwidth = 1;
         cont.gridx = 0;
@@ -146,33 +149,49 @@ public class Programmation extends JPanel implements ActionListener{
         cont.weightx = 0;
         cont.ipadx = 0;
         cont.gridwidth = 2;
-        cont.insets = new Insets(20,0,20,0);
+        cont.insets = new Insets(10,0,10,0);
         cont.gridx = 0;
         cont.gridy = 2;
         this.add(horaire,cont);
         
-        cont.fill = GridBagConstraints.BOTH;
+        
+        cont.insets = new Insets(10,0,5,0);
+        cont.fill = GridBagConstraints.CENTER;
         cont.gridwidth = 2;
         cont.gridx = 0;
         cont.gridy = 3;
         this.add(selection, cont);
         
+        cont.fill = GridBagConstraints.NONE;
         cont.gridx = 0;
         cont.gridy = 4;
         this.add(theChoisit, cont);
+        
+        
+        
         cont.insets = new Insets(0,0,0,0);
         int i;
         for (i=0; i<7; i++){
             cont.gridx = 0;
             cont.gridy = 6+i;
+            listeCheckBox[i].setFont(police2);
+            cont.anchor = GridBagConstraints.WEST;
+            cont.fill = GridBagConstraints.CENTER;
             this.add(listeCheckBox[i], cont);
             listeCheckBox[i].addActionListener(this);
             
         }
+        
+        cont.anchor = GridBagConstraints.CENTER;
         cont.insets = new Insets(15,0,0,0);
         cont.gridx = 0;
         cont.gridy = i+7;
+        valider.setBackground(vert);
+        valider.setForeground(Color.white);;
+        valider.setFont(police1);
         this.add(valider,cont);
+        
+        
         chaineUpdate();
     }
     /**
@@ -212,7 +231,7 @@ public class Programmation extends JPanel implements ActionListener{
             }
             //temp = fen.showDialog();
             if (temp != null){
-                theChoisit.setText(temp.getNom());
+                theChoisit.setText("Thé choisi : " + temp.getNom());
                 t = temp;
                 this.init();
             }

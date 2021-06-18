@@ -72,7 +72,8 @@ public class Infusion extends JPanel implements ActionListener{
      */
     private void init(){
         this.removeAll();
-        Font police1 = new Font("Arial",Font.BOLD,15);
+        Font police1 = new Font("Arial",Font.BOLD,18);
+        Font police2 = new Font("Arial",Font.PLAIN,18);
         //inits
         titreThe = new JLabel(t.getNom());
         titreThe.setFont(police1);
@@ -81,9 +82,11 @@ public class Infusion extends JPanel implements ActionListener{
         description.setEditable(false);
         description.setLineWrap(true);
         description.setWrapStyleWord(true);
+        description.setFont(police2);
         
         scrollPane = new JScrollPane(description);
-        scrollPane.setPreferredSize(new Dimension(300,100));
+        scrollPane.setFont(police1);
+        scrollPane.setPreferredSize(new Dimension(400,150));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
@@ -98,6 +101,7 @@ public class Infusion extends JPanel implements ActionListener{
         progressTime.setValue(percentageComplete);
         progressTime.setForeground(Color.red);
         
+        
         indicationEtat = new JLabel(precho);
         indicationEtat.setForeground(Color.red);
         
@@ -105,6 +109,7 @@ public class Infusion extends JPanel implements ActionListener{
         double temp = t.getTempsInfusion() - tempsmin;
         tempssec = (int)(temp*60);
         tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
+        tempsRestant.setFont(police1);
         
         
         
@@ -135,6 +140,7 @@ public class Infusion extends JPanel implements ActionListener{
         
         cont.gridx = 0;
         cont.gridy = 4;
+        cont.fill = GridBagConstraints.CENTER;
         this.add(indicationEtat,cont);
         
         cont.gridx = 0;
