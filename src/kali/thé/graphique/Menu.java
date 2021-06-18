@@ -123,6 +123,7 @@ public class Menu extends JFrame implements ActionListener{
                                 Infusion temp = new Infusion(Menu.this,proglist.get(i));
                                 setPano(temp);
                                 temp.startThe();
+                                System.out.println(">>>>>>>>>>>>>>>>>>>>>jour numero " + da + "<<<<<<<<<<<<<<<<<<<<<");
                             }
                         }
                     }

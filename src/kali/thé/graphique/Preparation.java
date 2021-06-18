@@ -65,6 +65,8 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     String precho = " ";
     
     boolean preCho = true;
+    boolean panier = true;
+    
     
     javax.swing.Timer timer;
     //led
@@ -225,6 +227,11 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 owner.theProgShow.setEnabled(false);
             }
             
+            else if (panier){
+                owner.motor.descendre();
+                panier = false;
+            }
+            
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
                 
                 owner.led.stop();
@@ -257,6 +264,8 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                     Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 owner.b.stop();
+                owner.motor.monter();
+                panier = true;
             }
         }
     }

@@ -50,6 +50,7 @@ public class Infusion extends JPanel implements ActionListener{
     int tempssec = 0;
     boolean preCho = true;
     String precho = " ";
+    boolean panier = true;
     
     javax.swing.Timer timer;
     
@@ -156,6 +157,11 @@ public class Infusion extends JPanel implements ActionListener{
                 owner.theProgShow.setEnabled(false);
             }
             
+            else if (panier){
+                owner.motor.descendre();
+                panier = false;
+            }
+            
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){
                 owner.led.stop();
                 precho = "     Infusion     ";
@@ -185,6 +191,8 @@ public class Infusion extends JPanel implements ActionListener{
                     Logger.getLogger(Preparation.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 owner.b.stop();
+                owner.motor.monter();
+                panier = true;
             }
         }
         
