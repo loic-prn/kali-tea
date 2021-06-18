@@ -44,7 +44,7 @@ public class SQLRequest {
     }
     
     public ArrayList<String> selectDesc(){
-        String query = "select Description from The";
+        String query = "select Desciption from The";
         ArrayList<String> ret = new ArrayList<>();
         try {
             Connection conn = this.connect();
@@ -52,8 +52,8 @@ public class SQLRequest {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                System.out.println(rs.getString("Description"));
-                ret.add(rs.getString("Description"));
+                System.out.println(rs.getString("Desciption"));
+                ret.add(rs.getString("Desciption"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -80,7 +80,7 @@ public class SQLRequest {
     }
     
     public ArrayList<Integer> selectTemperature(){
-        String query = "select Temperature from The";
+        String query = "select TemperatureEau from The";
         ArrayList<Integer> ret = new ArrayList<>();
         try {
             Connection conn = this.connect();
@@ -88,8 +88,8 @@ public class SQLRequest {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                System.out.println(rs.getInt("Temperature"));
-                ret.add(rs.getInt("Temperature"));
+                System.out.println(rs.getInt("TemperatureEau"));
+                ret.add(rs.getInt("TemperatureEau"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

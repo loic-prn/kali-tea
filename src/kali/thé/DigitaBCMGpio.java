@@ -58,9 +58,9 @@ public class DigitaBCMGpio implements Execute{
      */
     @Override
     public void start()  {
-        System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
+        //System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
 
-        System.out.println("--> GPIO state should be: ON");
+        //System.out.println("--> GPIO state should be: ON");
 
         try {
             pin.high();
@@ -68,16 +68,16 @@ public class DigitaBCMGpio implements Execute{
         
         }catch (InterruptedException ex) {
             Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("PITIE");
+            //System.out.println("PITIE");
         }
     }
     /**
      * switch of the LED.
      */
         public void stop()  {
-        System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
+        //System.out.println("<--Pi4J--> GPIO Control LED on GPIO BCM_16 ... started.");
 
-        System.out.println("--> GPIO state should be: ON");
+        //System.out.println("--> GPIO state should be: ON");
 
         try {
             pin.low();
@@ -85,7 +85,7 @@ public class DigitaBCMGpio implements Execute{
         
         }catch (InterruptedException ex) {
             Logger.getLogger(DigitaBCMGpio.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("PITIE");
+            //System.out.println("PITIE");
         }
     }
 

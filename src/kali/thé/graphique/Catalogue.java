@@ -50,9 +50,12 @@ public class Catalogue extends JPanel implements ActionListener{
         sql = new SQLRequest();
         
         int a = sql.selectDesc().size();
+        System.out.println("lulu tu sais pas coder: "  + a);
         
         for (int i = 0; i < a; i++){
-            
+            //tabThe.add(new The(11, "lulu", 34, "lulu il sait pas faire de tableau et ça rend un peu fou quand même"));
+            //The truc = new The(sql.selectDuree().get(i), sql.selectName().get(i), sql.selectTemperature().get(i), sql.selectDesc().get(i));
+            //System.out.println(truc.getNom() + "\n" + truc.getTemperature() + "\n" + truc.getTempsInfusion() + "\n" + truc.getDescription());
             tabThe.add(new The(sql.selectDuree().get(i), sql.selectName().get(i), sql.selectTemperature().get(i), sql.selectDesc().get(i)));
         }
         

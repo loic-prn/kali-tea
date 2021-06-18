@@ -14,6 +14,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -197,8 +199,18 @@ public class Programmation extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         The temp = null;
         if (e.getSource() == selection){
-            PopupCatalogue fen = new PopupCatalogue(new Catalogue(owner,true), this.owner);
-            temp = fen.showDialog();
+            PopupCatalogue fen;
+            try {
+                fen = new PopupCatalogue(new Catalogue(owner,true), this.owner);
+                temp = fen.showDialog();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Programmation.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Programmation.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Programmation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //temp = fen.showDialog();
             if (temp != null){
                 theChoisit.setText(temp.getNom());
                 t = temp;
