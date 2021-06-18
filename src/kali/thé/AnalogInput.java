@@ -57,6 +57,10 @@ public class AnalogInput implements Execute{
     private double donnees; // HEDI
     I2CDevice device;
     
+    
+    //test
+    int compteur = 0;
+    double memoireTemp = 0;
     /**
      * The constructor to handle an analog input device.
      * @param numCanal the canal where the input is connected.
@@ -90,10 +94,6 @@ public class AnalogInput implements Execute{
 
         // allow for user to exit program using CTRL-C
         //console.promptForExit();
-        ArrayList<Integer> list;
-        list = new ArrayList<>();
-        int i = 0;
-        int j = 0;
         for (int a =0; a <3; a++){
 
             // now we will perform our first I2C READ operation to retrieve raw integration
@@ -125,26 +125,17 @@ public class AnalogInput implements Execute{
             }
             if (BytesReceveived == 2) {
                 
-                dataRead = (buffer[1] * 256) + (128 * j) + buffer[0];
                 
-                //dataRead = ((int)buffer[1])<<8 | buffer[0]; //BUTAHIER
-               
-                list.add(dataRead);
-                if(i >= 2){
-                    if((list.get(i) - list.get(i-1)) < -120){
-                        j++;
-                    }
-                }
+                dataRead = ((int)buffer[1])<<8 | (int)buffer[0]; //BUTAHIER
                 
                 if (dataRead < 4096 && dataRead > 0) {
-                    console.println("Analog A0  " + (double)dataRead/17.0);
-                    donnees = (double)dataRead/17.0; // HEDI
+                    console.println("Analog A0  " + (double)dataRead/5.0);
+                    donnees = dataRead/5.0;
                     
                     
-                    //console.println("AnalogInput A0 (decimal) = " + dataRead);
+                    System.out.println("AnalogInput A0 (decimal) = " + (double)dataRead/5.0);
                     //console.println("AnalogInput A0 (hexa) = " + String.format("0x%02x", dataRead));
                 }
-                i++;
             }
         }
     }
@@ -152,7 +143,6 @@ public class AnalogInput implements Execute{
     
     
     public double getDonnees(){ // HEDI
-        System.out.println("LA TEMPERATURE CAPTEE : " + donnees);
         return donnees;
     }
     
