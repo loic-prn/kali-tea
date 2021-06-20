@@ -71,6 +71,7 @@ public class Menu extends JFrame implements ActionListener{
      */
     public Menu(int longueur, int largeur) throws InstantiationException, IllegalAccessException {
         led = new DigitaBCMGpio(RaspiBcmPin.GPIO_16);
+        
         try {
             termometre = new AnalogInput(0);
         } catch (IOException ex) {
@@ -110,11 +111,11 @@ public class Menu extends JFrame implements ActionListener{
             
             
             ++cpt;
-            if (cpt == 10){ //chaque minute, on verifie si un thé programmé doit commencer
+            if (cpt == 60){ //chaque minute, on verifie si un thé programmé doit commencer
                 cpt = 0;
                 if (!proglist.isEmpty()){
                     for (int i=0; i<proglist.size(); i++){
-                        if (proglist.get(i).getPretPour().getHours() == date.getHours() && proglist.get(i).getPretPour().getMinutes()== date.getMinutes()){
+                        if (proglist.get(i).getPretPour().getHours() == date.getHours() && proglist.get(i).getPretPour().getMinutes() - ((int)proglist.get(i).getTempsInfusion() + 1)== date.getMinutes()){
                             int da = date.getDay() - 1;
                             if (da == -1){
                                 da = 6;
