@@ -38,7 +38,7 @@ public class Accueil extends JPanel implements ActionListener{
     
     /**
      * The menu constructor
-     * @param menu, the JFrame that own this JPanel.
+     * @param o, the Menu that own this JPanel.
      */
     public Accueil(Menu o){
         this.owner = o;   

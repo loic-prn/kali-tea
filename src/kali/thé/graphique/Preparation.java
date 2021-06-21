@@ -280,7 +280,6 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     }
     /** 
      * here are handled the differents action performed on this page.
-     * @param e the event that occured.
      */
     
     public void startThe(){

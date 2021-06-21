@@ -38,8 +38,8 @@ public class Catalogue extends JPanel implements ActionListener{
     
     /**
      * Catalogue constructor
-     * @param o the parent menu. JFrame that own this JPanel
-     * @param pop if this JPanel correspond to a popup
+     * @param o, the parent menu. JFrame that own this JPanel
+     * @param pop, if this JPanel correspond to a popup
      */
     public Catalogue(Menu o, boolean pop) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         popup = pop;

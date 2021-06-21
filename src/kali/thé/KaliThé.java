@@ -21,7 +21,7 @@ public class KaliThé {
 
     /**
      * @param args the command line arguments
-     * 
+     *
      */
     public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException, InstantiationException, IllegalAccessException {
         // truc
