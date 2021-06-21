@@ -57,7 +57,7 @@ public class Infusion extends JPanel implements ActionListener{
     /**
      * Infusion constructor.
      * @param o the parent menu.
-     * @param t the the.
+     * @param t the thea.
      */
     public Infusion(Menu o, The t) {
         this.owner = o;
@@ -68,7 +68,7 @@ public class Infusion extends JPanel implements ActionListener{
         init();
     }
     /**
-     * This function just help the constructor to be simpler to read.
+     * This function just help the constructor to be easier to read.
      */
     private void init(){
         this.removeAll();
@@ -150,7 +150,7 @@ public class Infusion extends JPanel implements ActionListener{
     }
     
     /**
-     * This function will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time.
+     * This class will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time. The function inside is called once a second
      */
     class ClockListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -259,6 +259,9 @@ public class Infusion extends JPanel implements ActionListener{
         }*/
     }
 
+    /**
+     * the funciton that start the timer, and so the thea
+     */
     public void startThe(){
         precho = "En préchauffe";
         init();
@@ -269,7 +272,7 @@ public class Infusion extends JPanel implements ActionListener{
     
     /**
      * 
-     * @param e 
+     * @param e the event that occured.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -278,6 +281,10 @@ public class Infusion extends JPanel implements ActionListener{
         }
     }
     
+    /**
+     * a function that knows if the the water is hot enough
+     * @return 
+     */
     private boolean prechauffe(){
         
         owner.retour.setEnabled(false);

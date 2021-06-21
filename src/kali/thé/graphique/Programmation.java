@@ -64,7 +64,7 @@ public class Programmation extends JPanel implements ActionListener{
     
     /**
      * Progrmmation constructor
-     * @param o the parent Menu.
+     * @param o the parent Menu, which is a JFrame
      */
     public Programmation(Menu o) {
         this.owner = o;

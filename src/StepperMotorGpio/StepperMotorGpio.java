@@ -30,14 +30,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This example code demonstrates how to control a stepper motor
- * using the GPIO pins on the Raspberry Pi.
- *
- * @author Robert Savage
- *  simplified & adapted by Lionel Buathier
- *  for CX28BYJ48-08 (4096 steps)
  * 
- *  connecteurs D22 & D23 / D24 & D25 (!! cables dédoublés)
+ * @author lolo
  */
 public class StepperMotorGpio implements Execute{
 

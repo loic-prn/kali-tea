@@ -130,7 +130,7 @@ public class AnalogInput implements Execute{
                 
                 if (dataRead < 4096 && dataRead > 0) {
                     console.println("Analog A0  " + (double)dataRead/5.0);
-                    donnees = dataRead/5.0;
+                    donnees = (dataRead/5.0)/2.0;
                     
                     
                     System.out.println("AnalogInput A0 (decimal) = " + (double)dataRead/5.0);

@@ -214,7 +214,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     }
 
     /**
-     * This function will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time.
+     * This class will listen to the time and make the progress bar grow up or ring the buzzer at the end of the time. The function inside will be called once a second
      */
     class ClockListener implements ActionListener { //Chaque seconde, le code ci-dessous est réalisé, (après avoir qclickuer sur préparer)
         
@@ -280,7 +280,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
     }
     /** 
      * here are handled the differents action performed on this page.
-     * @param e 
+     * @param e the event that occured.
      */
     
     public void startThe(){

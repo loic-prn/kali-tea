@@ -24,8 +24,8 @@ public class The {
      * @param nom Le nom du thé
      * @param temperature la température d'infusion du thé, soit la température que la resistance atteindra pour l'infusion
      * @param description Description du thé
+     * @param categorie La catégorie du thé selectionné
      */
-    
     public The(double tempsInfusion, String nom, int temperature, String description,String categorie) {
         this.tempsInfusion = tempsInfusion;
         this.nom = nom;
@@ -34,22 +34,42 @@ public class The {
         this.categorie = categorie;
     }
 
+    /**
+     * 
+     * @return le temps d'infusion du thé
+     */
     public double getTempsInfusion() {
         return tempsInfusion;
     }
+    
+    /**
+     * 
+     * @return le nom du thé
+     */
     public String getNom() {
         return nom;
     }
-
+    
+    /**
+     * 
+     * @return la température du thé
+     */
     public int getTemperature() {
         return temperature;
     }
 
-
+    /**
+     * 
+     * @return la description du thé
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * 
+     * @return la température du thé
+     */
     public String getCategorie() {
         return categorie;
     }    

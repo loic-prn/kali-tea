@@ -46,7 +46,7 @@ public class Param extends JPanel implements ActionListener{
     }
     
     /**
-     * This function just make the constructor reading simpler.
+     * This function makes the constructor easier.
      */
     private void init(){
         Font police1 = new Font("Arial",Font.BOLD,15);

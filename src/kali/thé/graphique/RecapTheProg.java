@@ -31,12 +31,20 @@ public class RecapTheProg extends JPanel implements ActionListener{
     ArrayList<JTextArea> tabTP;
     ArrayList<JButton> tabDel;
     
+     /**
+      * the constructor of RecapTheProg
+      * @param owner return the JFrame that own this JPanel
+      */
     public RecapTheProg(Menu owner){
         this.owner = owner;
         this.setBackground(Color.white);
         owner.retour.setEnabled(true);
         init();
     }
+    
+    /**
+     * the initialisation function called in the constructor.
+     */
     
     private void init(){
         this.removeAll();
@@ -67,6 +75,10 @@ public class RecapTheProg extends JPanel implements ActionListener{
         }
     }
     
+    /**
+     * function that listen to actions
+     * @param e the event that occured.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i=0; i<tabDel.size(); i++){

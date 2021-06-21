@@ -37,8 +37,8 @@ public class Accueil extends JPanel implements ActionListener{
     JLabel logo;
     
     /**
-     * 
-     * @param Menu, the menu you want to put as the default one 
+     * The menu constructor
+     * @param menu, the JFrame that own this JPanel.
      */
     public Accueil(Menu o){
         this.owner = o;   
@@ -47,7 +47,7 @@ public class Accueil extends JPanel implements ActionListener{
         this.init();
     }
     /**
-     * just a function to initialize de menu. Organize de different items.
+     * Just a function to initialize the menu. Organize the different items.
      */
     private void init(){
         Color vert = new Color(0x00b300);
@@ -113,7 +113,7 @@ public class Accueil extends JPanel implements ActionListener{
     }
 
     /**
-     * this is the function where the differents action are managed.
+     * this is the function where the differents action listened are managed.
      * @param e is the event that occured.
      */
     @Override
