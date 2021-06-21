@@ -108,7 +108,7 @@ public class Infusion extends JPanel implements ActionListener{
         tempsmin = (int)t.getTempsInfusion();
         double temp = t.getTempsInfusion() - tempsmin;
         tempssec = (int)(temp*60);
-        tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
+        tempsRestant = new JLabel("     Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec     ");
         tempsRestant.setFont(police1);
         
         
@@ -166,30 +166,37 @@ public class Infusion extends JPanel implements ActionListener{
             else if (panier){
                 owner.motor.descendre();
                 panier = false;
+                owner.retour.setEnabled(false);
+                infuser.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
             }
             
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){
                 owner.led.stop();
+                
                 precho = "     Infusion     ";
-                init();
                 
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
-                init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
-                
+                owner.setPano(Infusion.this); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
+                owner.retour.setEnabled(false);
+                infuser.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
               
                
 //                owner.led.start();
             }
             else if ((cpt*100/(int)(temps*60) == 100)){
+                
                 timer.stop();
                 precho = "                   ";
-                init();
+                owner.setPano(Infusion.this);
+                owner.retour.setEnabled(false);
+                infuser.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
                 cpt = 0;
                 percentageComplete = 0;
-                owner.retour.setEnabled(true);
-                infuser.setEnabled(true);
-                owner.theProgShow.setEnabled(true);
+                
                 owner.b.start();
                 try {
                     Thread.sleep(1000);
@@ -199,6 +206,10 @@ public class Infusion extends JPanel implements ActionListener{
                 owner.b.stop();
                 owner.motor.monter();
                 panier = true;
+                owner.retour.setEnabled(true);
+                infuser.setEnabled(true);
+                owner.theProgShow.setEnabled(true);
+                
             }
         }
         

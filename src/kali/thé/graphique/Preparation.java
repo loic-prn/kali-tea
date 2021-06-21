@@ -107,6 +107,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         slider1.addChangeListener(this);
         temperature = new JLabel(Integer.toString(temperatureGET) + "°C");
         slider1.setValue(temperatureGET);
+        slider1.setBackground(Color.white);
         
         tempsPrep = new JLabel("Temps de préparation");
         tempsPrep.setFont(police1);
@@ -131,7 +132,7 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
         progressPrep.setForeground(Color.red);
         
         printHour = new JLabel(Integer.toString(tempsmin) + " mins " + Integer.toString(tempssec) + " sec");
-        tempsRestant = new JLabel("Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec");
+        tempsRestant = new JLabel("     Temps restant : " + Integer.toString((int)(temps*60-cpt)/60) + " mins " + Integer.toString((int)(temps*60-cpt)%60) + " sec     ");
         
         prechauffeTxt = new JLabel(precho);
         prechauffeTxt.setForeground(Color.red);
@@ -230,18 +231,22 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
             else if (panier){
                 owner.motor.descendre();
                 panier = false;
+                owner.retour.setEnabled(false);
+                preparer.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
             }
             
             else if(!preCho && (cpt*100/(int)(temps*60) < 100)){ // Si la bar est pas complète
-                
+                                                
                 owner.led.stop();
                 precho = "     Infusion     ";
-                init();
                 
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
                 init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
-                
+                owner.retour.setEnabled(false);
+                preparer.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
                 //INFUSION
                 
             }
@@ -252,9 +257,9 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 init();
                 cpt = 0;
                 percentageComplete = 0;
-                owner.retour.setEnabled(true);
-                preparer.setEnabled(true);
-                owner.theProgShow.setEnabled(true);
+                owner.retour.setEnabled(false);
+                preparer.setEnabled(false);
+                owner.theProgShow.setEnabled(false);
                 
                 
                 owner.b.start();
@@ -266,6 +271,10 @@ public class Preparation extends JPanel implements ActionListener,ChangeListener
                 owner.b.stop();
                 owner.motor.monter();
                 panier = true;
+                
+                owner.retour.setEnabled(true);
+                preparer.setEnabled(true);
+                owner.theProgShow.setEnabled(true);
             }
         }
     }
