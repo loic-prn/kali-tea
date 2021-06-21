@@ -178,7 +178,7 @@ public class Infusion extends JPanel implements ActionListener{
                 
                 cpt++;
                 percentageComplete = (cpt*100/(int)(temps*60)); //Cb de temps en % il reste.
-                owner.setPano(Infusion.this); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
+                init(); //La progress bar est refresh avec la nouvelle valeur (percentageComplete)
                 owner.retour.setEnabled(false);
                 infuser.setEnabled(false);
                 owner.theProgShow.setEnabled(false);
